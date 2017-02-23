@@ -4,7 +4,7 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class LoginService {
 
-  loginUrl = '/app/login';
+  loginUrl = '/LoginMock';
   headers = new Headers({
     'Content-Type': 'application/json'
   });
