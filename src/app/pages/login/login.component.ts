@@ -1,4 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {LoginService} from './login.service';
 
@@ -13,14 +14,17 @@ export class LoginComponent {
   @ViewChild('lang') lang;
   @ViewChild('database') database;
 
-  isShowError = false;
-  errorInfo = '出现未知错误';
-  loginBtnText = '登录';
+  private isShowError: boolean = false;
+  private errorInfo: string = '出现未知错误';
+  private loginBtnText: string = '登录';
 
-  constructor(private loginService: LoginService) {
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {
   }
 
-  login() {
+  login(): void {
 
     if (this.validate()) {
 
@@ -31,14 +35,24 @@ export class LoginComponent {
       this.loginService
         .login(params)
         .then((res) => {
-          console.log(res);
 
           this.loginBtnText = '登录';
+
+          if (res.username === 'admin' && res.password === '111111') {
+
+            this.router.navigate(['catalog']);
+
+          } else {
+
+            this.isShowError = true;
+            this.errorInfo = '用户名或密码错误';
+            this.account.nativeElement.focus();
+          }
         });
     }
   }
 
-  validate() {
+  validate(): boolean {
 
     this.isShowError = false;
 

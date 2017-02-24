@@ -1,6 +1,6 @@
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 
-export class LoginMock {
+export class LoginMock implements InMemoryDbService{
 
   createDb() {
 
@@ -9,6 +9,6 @@ export class LoginMock {
       password: '111111'
     }];
 
-    return users;
+    return {users};
   }
 }

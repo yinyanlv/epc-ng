@@ -4,15 +4,15 @@ import {Http, Headers} from '@angular/http';
 @Injectable()
 export class LoginService {
 
-  loginUrl = '/LoginMock';
-  headers = new Headers({
+  private loginUrl = '/app/users';
+  private headers = new Headers({
     'Content-Type': 'application/json'
   });
 
   constructor(private http: Http) {
   }
 
-  login(params) {
+  login(params: Object): Promise<any> {
 
     return this.http
       .post(this.loginUrl, params, {headers: this.headers})
@@ -21,7 +21,8 @@ export class LoginService {
       .catch(this.handleError);
   }
 
-  handleError(err) {
+  handleError(err: any): Promise<any> {
+
     return Promise.reject(err.message || err);
   }
 }
