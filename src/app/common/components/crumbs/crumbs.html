@@ -1,0 +1,19 @@
+<div class="page-crumbs" class="clearfix">
+  <div id="crumbs">
+    <script type="text/template">
+      <ul class="list">
+        {{#records}}
+        {{#isShow}}
+        <li class="item">
+          <span class="label">{{label}}：</span>
+          <a href="javascript:;" data-type="{{type}}" data-code="{{code}}" data-url="{{url}}" data-click="{{click}}" class="text-link2">{{text}}</a>
+        </li>
+        {{/isShow}}
+        {{/records}}
+      </ul>
+    </script>
+  </div>
+
+  <a id="btn-print" class="icon-btn print" href="javascript:;"><span class="icon"></span><span class="text">打印当前配件图册</span></a>
+
+</div>

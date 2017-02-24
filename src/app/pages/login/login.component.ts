@@ -1,5 +1,6 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import {Router} from '@angular/router';
+import * as $ from 'jquery';
 
 import {LoginService} from './login.service';
 
@@ -19,9 +20,16 @@ export class LoginComponent {
   private loginBtnText: string = '登录';
 
   constructor(
+    private el: ElementRef,
     private loginService: LoginService,
     private router: Router
   ) {
+  }
+
+  ngAfterViewInit() {
+
+
+    console.log($(this.el.nativeElement));
   }
 
   login(): void {
