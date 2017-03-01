@@ -18,6 +18,7 @@ export class LoginComponent {
   private isShowError: boolean = false;
   private errorInfo: string = '出现未知错误';
   private loginBtnText: string = '登录';
+  private logining: boolean = false;
 
   constructor(
     private el: ElementRef,
@@ -32,8 +33,11 @@ export class LoginComponent {
 
   login(): void {
 
+    if (this.logining) return;
+
     if (this.validate()) {
 
+      this.logining = true;
       this.loginBtnText = '登录中...';
 
       let params = this.getParams();
@@ -43,8 +47,8 @@ export class LoginComponent {
         .then((res) => {
 
           this.loginBtnText = '登录';
+          this.logining = false;
 
-          console.log(res);
           if (res.success) {
 
             this.router.navigate(['catalog']);
