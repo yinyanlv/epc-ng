@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {serverMap} from '../../config/server-config';
 
 @Injectable()
 export class LoginService {
 
-  private loginUrl = '/app/users';
+  private loginUrl = serverMap.basePath + '/login';
   private headers = new Headers({
     'Content-Type': 'application/json'
   });

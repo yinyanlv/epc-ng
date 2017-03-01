@@ -22,7 +22,7 @@ import {LoginMock} from './mock/login.mock';
     FormsModule,
     HttpModule,
     routing,
-    InMemoryWebApiModule.forRoot(LoginMock),
+    // InMemoryWebApiModule.forRoot(LoginMock),
     LoginModule,
     CatalogModule
   ],

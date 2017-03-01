@@ -28,8 +28,6 @@ export class LoginComponent {
 
   ngAfterViewInit() {
 
-
-    console.log($(this.el.nativeElement));
   }
 
   login(): void {
@@ -46,7 +44,8 @@ export class LoginComponent {
 
           this.loginBtnText = '登录';
 
-          if (res.username === 'admin' && res.password === '111111') {
+          console.log(res);
+          if (res.success) {
 
             this.router.navigate(['catalog']);
 
