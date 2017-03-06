@@ -13,7 +13,7 @@ export class SelectService {
 
     if (selectName === '') return;
 
-    let url = serverMap.basePath + '/' + selectName;
+    let url = serverMap.basePath + '/select/' + selectName;
 
     return this.http
       .get(url)
