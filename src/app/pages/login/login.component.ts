@@ -1,14 +1,15 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
 
 import {LoginService} from './login.service';
+import {SelectService} from '../../common/services/select.service';
 
 @Component({
   templateUrl: './login.html',
   styleUrls: ['./login.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, AfterViewInit{
 
   @ViewChild('account') account;
   @ViewChild('password') password;
@@ -19,12 +20,30 @@ export class LoginComponent {
   private errorInfo: string = '出现未知错误';
   private loginBtnText: string = '登录';
   private logining: boolean = false;
+  private langList;
+  private databaseList;
 
   constructor(
     private el: ElementRef,
+    private router: Router,
     private loginService: LoginService,
-    private router: Router
+    private selectService: SelectService
   ) {
+  }
+
+  ngOnInit() {
+
+    this.selectService
+      .load('lang')
+      .then((res) => {
+        this.langList = res;
+      });
+
+    this.selectService
+      .load('database')
+      .then((res) => {
+        this.databaseList = res;
+      });
   }
 
   ngAfterViewInit() {

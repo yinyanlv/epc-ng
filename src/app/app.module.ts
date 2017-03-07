@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {LoginModule} from './pages/login/login.module';
 import {CatalogModule} from './pages/catalog/catalog.module'
+import {SelectService} from './common/services/select.service';
 
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {LoginMock} from './mock/login.mock';
@@ -26,7 +27,9 @@ import {LoginMock} from './mock/login.mock';
     LoginModule,
     CatalogModule
   ],
-  providers: [],
+  providers: [
+    SelectService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

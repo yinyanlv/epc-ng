@@ -32,22 +32,7 @@
           <div class="row row-login">
             <div class="cell label">语言:</div>
             <div class="cell textbox">
-
-              <p-dropdown></p-dropdown>
-              <!--<span class="form-select form-select-lang">-->
-                  <!--<input type="hidden" class="form-select-input" data-field="lang" autocomplete="off" value="1" #lang>-->
-                  <!--<a class="form-select-switch-btn" href="javascript:;">-->
-                    <!--<span class="form-select-text" title=""></span>-->
-                  <!--</a>-->
-                  <!--<ul id="lang-select" class="form-select-option-list" style="display: none;">-->
-                    <!--<script type="text/template" id="select-template" class="template">-->
-                      <!--{{#data}}-->
-                      <!--<li class="form-select-option" data-value={{code}} title="{{name}}">{{name}}</li>-->
-                      <!--{{/data}}-->
-                    <!--</script>-->
-                  <!--</ul>-->
-                <!--</span>-->
-
+              <p-dropdown [options]="langList"></p-dropdown>
             </div>
           </div>
           <div class="row row-login">
