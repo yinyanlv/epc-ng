@@ -5,9 +5,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   template: '<router-outlet></router-outlet>',
   styleUrls: [
-    '../../node_modules/primeng/resources/themes/omega/theme.css',
-    '../../node_modules/primeng/resources/primeng.css',
-    './app.component.scss',
+    './app.component.scss'
   ]
 })
 export class AppComponent {
