@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef, OnInit, AfterViewInit} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
 
@@ -7,7 +7,8 @@ import {SelectService} from '../../common/services/select.service';
 
 @Component({
   templateUrl: './login.html',
-  styleUrls: ['./login.scss']
+  styleUrls: ['./login.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, AfterViewInit{
 

@@ -102,6 +102,7 @@ body {
   height: 36px;
   line-height: 36px;
   margin: 5px 0;
+  width:100%;
 }
 
 .row-login .textbox input[type=text],
@@ -192,4 +193,10 @@ body {
 
 .clearfix {
   zoom: 1;
+}
+
+
+/* primeng */
+.row-login .ui-dropdown{
+  line-height: 30px;
 }
