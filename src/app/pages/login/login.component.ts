@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 
 import {LoginService} from './login.service';
 import {SelectService} from '../../common/services/select.service';
+import {GlobalStateService} from '../../common/services/global-state.service';
 
 @Component({
   templateUrl: './login.html',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit, AfterViewInit{
     private el: ElementRef,
     private router: Router,
     private loginService: LoginService,
-    private selectService: SelectService
+    private selectService: SelectService,
+    private globalState: GlobalStateService
   ) {
   }
 
@@ -36,13 +38,13 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
     this.selectService
       .load('lang')
-      .then((res) => {
+      .subscribe((res) => {
         this.langList = res;
       });
 
     this.selectService
       .load('database')
-      .then((res) => {
+      .subscribe((res) => {
         this.databaseList = res;
       });
   }
@@ -64,10 +66,12 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
       this.loginService
         .login(params)
-        .then((res) => {
+        .subscribe((res) => {
 
           this.loginBtnText = '登录';
           this.logining = false;
+
+          this.globalState.isLogined = true;
 
           if (res.success) {
 

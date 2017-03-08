@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {Observable} from 'rxjs';
 
 import {serverMap} from '../../config/server-config';
 
@@ -14,17 +15,18 @@ export class LoginService {
   constructor(private http: Http) {
   }
 
-  login(params: Object): Promise<any> {
+  login(params: Object): Observable<any> {
 
     return this.http
       .post(this.loginUrl, params, {headers: this.headers})
-      .toPromise()
-      .then(res => res.json().data)
+      .map((res) => res.json().data)
       .catch(this.handleError);
   }
 
-  handleError(err: any): Promise<any> {
+  handleError(err: any): Observable<any> {
 
-    return Promise.reject(err.message || err);
+    let errMsg = err.message || err;
+
+    return Observable.throw(errMsg);
   }
 }
