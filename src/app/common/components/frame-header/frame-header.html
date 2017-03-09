@@ -2,16 +2,8 @@
   <a href="/epc/catalog" class="logo" id="logo" data-code="P01"><img
     src="http://res2.dev.servision.com.cn/baic/img/brand/P01.png"></a>
   <div class="search-box">
-        <span class="form-select" id="header-search-select">
-          <input class="form-select-input" type="hidden" value="vin" data-field="value" autocomplete="off">
-          <a class="form-select-switch-btn" href="javascript:;"><span class="form-select-text" title="">VIN码</span></a>
-          <ul class="form-select-option-list" style="display: none;">
-            <li class="form-select-option" title="VIN码" data-value="vin">VIN码</li>
-            <li class="form-select-option" title="配件编码" data-value="part-no">配件编码</li>
-            <li class="form-select-option" title="配件名称" data-value="part-name">配件名称</li>
-            <li class="form-select-option" title="整车编码" data-value="vehicle-code">整车编码</li>
-          </ul>
-        </span>
+    <p-dropdown [options]="searchList" ></p-dropdown>
+
     <input type="text" id="header-search-box" class="search-input" placeholder="输入VIN码后八位"/>
     <a href="javascript:;" id="header-search-close" class="search-close"></a>
     <a href="javascript:;" id="header-search-btn" class="search-btn">查询</a>
@@ -28,11 +20,6 @@
   <div class="other-search">
     <ul class="other-search-list">
       <li class="item"><a href="javascript:;" data-action="advanced-search" class="text-link2">高级查询</a></li>
-      <li class="item"><a href="javascript:;" data-action="supersession-search" class="text-link2">替换查询</a></li>
     </ul>
   </div>
-  <span class="tips hide page-tips" id="page-tips">
-        <span class="icon"></span>
-        <span class="text"></span>
-  </span>
 </div>

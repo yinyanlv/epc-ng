@@ -14,7 +14,6 @@ import {GlobalStateService} from './common/services/global-state.service';
 import {CanActivateGuardService} from './common/services/can-activate-guard.service';
 import {SelectService} from './common/services/select.service';
 
-
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {LoginMock} from './mock/login.mock';
 

@@ -3,13 +3,9 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class GlobalStateService {
 
-  private _isLogined = false;
+  isLogined: boolean = false;
 
-  get isLogined(): boolean {
-    return this._isLogined;
-  }
+  username: string;
 
-  set isLogined(val: boolean) {
-    this._isLogined = val;
-  }
+  userInfo: Object = null;
 }

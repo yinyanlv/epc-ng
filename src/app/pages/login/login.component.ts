@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
           this.logining = false;
 
           this.globalState.isLogined = true;
+          this.globalState.username = params.username;
 
           if (res.success) {
 
