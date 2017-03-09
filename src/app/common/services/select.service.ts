@@ -3,14 +3,18 @@ import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 
 import {serverMap} from '../../config/server-config';
+import {HandleErrorService} from './handle-error.service';
 
 @Injectable()
 export class SelectService {
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private handleError: HandleErrorService
+  ) {
   }
 
-  load(selectName: string = '') {
+  load(selectName: string = ''): Observable<any> {
 
     if (selectName === '') return;
 
@@ -19,13 +23,6 @@ export class SelectService {
     return this.http
       .get(url)
       .map((res) => res.json().data)
-      .catch(this.handleError);
-  }
-
-  private handleError(err: any): Observable<any> {
-
-    let errMsg = err.message || err;
-
-    return Observable.throw(errMsg);
+      .catch(this.handleError.handler);
   }
 }

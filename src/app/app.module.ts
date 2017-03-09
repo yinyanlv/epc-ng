@@ -13,6 +13,7 @@ import {SubjectService} from './common/services/subject.service';
 import {GlobalStateService} from './common/services/global-state.service';
 import {CanActivateGuardService} from './common/services/can-activate-guard.service';
 import {SelectService} from './common/services/select.service';
+import {HandleErrorService} from './common/services/handle-error.service';
 
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {LoginMock} from './mock/login.mock';
@@ -34,7 +35,8 @@ import {LoginMock} from './mock/login.mock';
     SubjectService,
     GlobalStateService,
     CanActivateGuardService,
-    SelectService
+    SelectService,
+    HandleErrorService
   ],
   bootstrap: [AppComponent]
 })

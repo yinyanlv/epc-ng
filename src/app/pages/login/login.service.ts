@@ -3,6 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {Observable} from 'rxjs';
 
 import {serverMap} from '../../config/server-config';
+import {HandleErrorService} from '../../common/services/handle-error.service';
 
 @Injectable()
 export class LoginService {
@@ -12,7 +13,10 @@ export class LoginService {
     'Content-Type': 'application/json'
   });
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private handleError: HandleErrorService
+  ) {
   }
 
   login(params: Object): Observable<any> {
@@ -20,13 +24,6 @@ export class LoginService {
     return this.http
       .post(this.loginUrl, params, {headers: this.headers})
       .map((res) => res.json().data)
-      .catch(this.handleError);
-  }
-
-  handleError(err: any): Observable<any> {
-
-    let errMsg = err.message || err;
-
-    return Observable.throw(errMsg);
+      .catch(this.handleError.handler);
   }
 }

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {serverMap} from '../../../config/server-config';
 import {GlobalStateService} from '../../services/global-state.service';
+import {HandleErrorService} from '../../services/handle-error.service';
 
 @Injectable()
 export class NavigationService {
@@ -12,7 +13,8 @@ export class NavigationService {
 
   constructor(
     private http: Http,
-    private globalState: GlobalStateService
+    private globalState: GlobalStateService,
+    private handleError: HandleErrorService
   ){
   }
 
@@ -25,13 +27,6 @@ export class NavigationService {
     return this.http
       .get(this.userInfoUrl + '?username=' + this.globalState.username)
       .map((res) => JSON.parse(res.json().data))
-      .catch(this.handleError);
-  }
-
-  private handleError(err: any): Observable<any> {
-
-    let errMsg = err.message || err;
-
-    return Observable.throw(errMsg);
+      .catch(this.handleError.handler);
   }
 }
