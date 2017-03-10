@@ -15,7 +15,7 @@ const routes: Routes = [{
 }, {
   path: 'catalog',
   component: CatalogComponent,
-  canActivate: [CanActivateGuardService]
+  // canActivate: [CanActivateGuardService]
 }];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {

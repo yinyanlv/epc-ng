@@ -14,7 +14,6 @@
   height: 65px;
 }
 .page-header .search-box {
-  width: 433px;
   height: 32px;
   margin: 17px 0 0 33px;
   border: 2px solid #d1251a;
@@ -96,4 +95,16 @@
   float: left;
   margin: 0 15px;
   line-height: 36px;
+}
+
+/* primeng */
+.search-box .ui-dropdown {
+  box-sizing: border-box;
+  font-size:12px;
+  height:32px;
+  line-height: 26px;
+  border-top:0;
+  border-left:0;
+  border-bottom: 0;
+  border-radius: 0;
 }

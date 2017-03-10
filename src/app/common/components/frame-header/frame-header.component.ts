@@ -11,7 +11,6 @@ export class FrameHeaderComponent implements OnInit{
   private searchList: Array<any>;
 
   ngOnInit() {
-
     this.searchList = [{
       label: 'VIN码',
       value: 'vin'
@@ -25,5 +24,10 @@ export class FrameHeaderComponent implements OnInit{
       label: '整车编码',
       value: 'vehicle-code'
     }];
+  }
+
+  selectChange(e) {
+
+    console.log(e);
   }
 }
