@@ -16,7 +16,7 @@ import {SelectService} from './common/services/select.service';
 import {HandleErrorService} from './common/services/handle-error.service';
 
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {LoginMock} from './mock/login.mock';
+import {LoginMock} from '../mock/login.mock';
 
 @NgModule({
   declarations: [
