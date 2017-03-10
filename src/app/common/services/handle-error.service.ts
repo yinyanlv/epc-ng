@@ -11,3 +11,4 @@ export class HandleErrorService {
     return Observable.throw(errMsg);
   }
 }
+
