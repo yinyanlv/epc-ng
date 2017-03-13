@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, AfterViewInit} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
 
@@ -11,7 +11,7 @@ import {GlobalStateService} from '../../common/services/global-state.service';
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit, AfterViewInit{
+export class LoginComponent implements OnInit{
 
   @ViewChild('account') account;
   @ViewChild('password') password;
@@ -40,17 +40,15 @@ export class LoginComponent implements OnInit, AfterViewInit{
       .load('lang')
       .subscribe((res) => {
         this.langList = res;
+        this.lang.value = this.langList[0].value;
       });
 
     this.selectService
       .load('database')
       .subscribe((res) => {
         this.databaseList = res;
+        this.database.value = this.databaseList[0].value;
       });
-  }
-
-  ngAfterViewInit() {
-
   }
 
   login(): void {
@@ -117,7 +115,9 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
     return {
       username: this.account.nativeElement.value,
-      password: this.password.nativeElement.value
+      password: this.password.nativeElement.value,
+      lang: this.lang.value,
+      database: this.database.value
     };
   }
 }

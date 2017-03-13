@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 
 @Component({
   selector: 'frame-header',
@@ -9,25 +9,33 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 export class FrameHeaderComponent implements OnInit{
 
   private searchList: Array<any>;
+  private placeholder: string;
+  @ViewChild('searchType')
+  private searchType;
 
   ngOnInit() {
     this.searchList = [{
-      label: 'VIN码',
-      value: 'vin'
-    }, {
       label: '配件编码',
-      value: 'part-no'
+      value: 'part-no',
+      placeholder: '请输入完整的配件编码'
     }, {
       label: '配件名称',
-      value: 'part-name'
-    }, {
-      label: '整车编码',
-      value: 'vehicle-code'
+      value: 'part-name',
+      placeholder: '请输入配件名称关键字'
     }];
+
+    this.searchType.value = this.searchList[0].value;
+    this.placeholder = this.searchList[0].placeholder;
   }
 
   selectChange(e) {
 
-    console.log(e);
+    this.searchType.value = e.value;
+
+    if (e.value === 'part-no') {
+      this.placeholder =  this.searchList[0].placeholder;
+    } else if (e.value === 'part-name') {
+      this.placeholder =  this.searchList[1].placeholder;
+    }
   }
 }

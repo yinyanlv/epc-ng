@@ -5,6 +5,9 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
+import {DropdownModule} from 'primeng/primeng';
+import {DialogModule} from 'primeng/primeng';
+
 import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {LoginModule} from './pages/login/login.module';
@@ -26,6 +29,8 @@ import {LoginMock} from '../mock/login.mock';
     BrowserModule,
     FormsModule,
     HttpModule,
+    DropdownModule,
+    DialogModule,
     routing,
     // InMemoryWebApiModule.forRoot(LoginMock),
     LoginModule,
