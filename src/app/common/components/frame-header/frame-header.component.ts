@@ -1,5 +1,7 @@
 import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 
+import {SubjectService} from '../../services/subject.service';
+
 @Component({
   selector: 'frame-header',
   encapsulation: ViewEncapsulation.None,
@@ -13,7 +15,13 @@ export class FrameHeaderComponent implements OnInit{
   @ViewChild('searchType')
   private searchType;
 
+  constructor(
+    private subject: SubjectService
+  ) {
+  }
+
   ngOnInit() {
+
     this.searchList = [{
       label: '配件编码',
       value: 'part-no',
@@ -37,5 +45,32 @@ export class FrameHeaderComponent implements OnInit{
     } else if (e.value === 'part-name') {
       this.placeholder =  this.searchList[1].placeholder;
     }
+  }
+
+  doQuery(val: string) {
+
+    if (this.isValid(val)) {
+
+      this.subject.trigger('advance-query:show', val);
+    } else {
+
+      alert('请输入内容');
+    }
+  }
+
+  doAdvanceQuery(val: string) {
+
+    if (this.isValid(val)) {
+
+      this.subject.trigger('advance-query:show', val);
+    } else {
+
+      alert('请输入内容');
+    }
+  }
+
+  isValid(val: string) {
+
+    return val ? true : false;
   }
 }
