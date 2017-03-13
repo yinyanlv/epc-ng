@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DropdownModule, DialogModule, DataTableModule, SharedModule} from 'primeng/primeng';
+import {DropdownModule, DialogModule, DataTableModule, SharedModule, TreeModule, TreeNode} from 'primeng/primeng';
 
 import {CatalogComponent} from './catalog.component';
 import {NavigationComponent} from '../../common/components/navigation/navigation.component';
@@ -20,7 +20,9 @@ import {QueryComponent} from '../../common/components/query/query.component';
     DropdownModule,
     DialogModule,
     DataTableModule,
-    SharedModule
+    SharedModule,
+    TreeModule,
+    TreeNode
   ],
   providers: [
     NavigationService

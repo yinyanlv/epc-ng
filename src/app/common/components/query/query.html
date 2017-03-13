@@ -3,4 +3,20 @@
   <form>
     {{data}}
   </form>
+
+  <p-dataTable [value]="[]" [rows]="10" [paginator]="true" [style]="{width: '1000px'}">
+    <p-column field="rowNumber" header="序号"></p-column>
+    <p-column field="partNo" header="配件编码"></p-column>
+    <p-column field="partName" header="配件名称"></p-column>
+    <p-column field="qty" header="用量"></p-column>
+    <p-column field="startDate" header="开始时间"></p-column>
+    <p-column field="endDate" header="结束时间"></p-column>
+    <p-column field="brandName" header="品牌"></p-column>
+    <p-column field="seriesName" header="车系"></p-column>
+    <p-column field="modelGroupName" header="车型组"></p-column>
+    <p-column field="modelName" header="车型"></p-column>
+    <p-column field="imageCode" header="图例编码"></p-column>
+    <p-column field="imageName" header="图例名称"></p-column>
+    <p-column field="partUsageName" header="用法名称"></p-column>
+  </p-dataTable>
 </p-dialog>
