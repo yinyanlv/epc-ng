@@ -1,5 +1,4 @@
 import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
-
 import {SubjectService} from '../../services/subject.service';
 
 @Component({

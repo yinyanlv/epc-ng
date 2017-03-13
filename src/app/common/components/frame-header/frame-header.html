@@ -1,16 +1,16 @@
 <div class="page-header clearfix" id="page-header">
-  <a class="logo" id="logo" data-code="P01"><img src="http://res2.dev.servision.com.cn/baic/img/brand/P01.png"></a>
+  <a class="logo" [routerLink]="['/catalog']"><img src="http://res2.dev.servision.com.cn/baic/img/brand/P01.png"></a>
 
   <div class="search-box">
     <p-dropdown [options]="searchList" [style]="{width: '100px'}" #searchType (onChange)="selectChange($event)" ></p-dropdown>
-    <input type="text" #searchInput class="search-input" placeholder="{{placeholder}}" (keyup.enter)="doQuery(searchInput.value)" required />
+    <input type="text" #searchInput class="search-input" placeholder="{{placeholder}}" (keyup.enter)="doQuery(searchInput.value)" />
     <a href="javascript:;" class="search-close"></a>
     <a href="javascript:;" class="search-btn" (click)="doQuery(searchInput.value)">查询</a>
   </div>
 
   <div class="other-search">
     <ul class="other-search-list">
-      <li class="item"><a href="javascript:;" data-action="advanced-search" class="text-link2" (click)="doAdvanceQuery(searchInput.value)">高级查询</a></li>
+      <li class="item"><a href="javascript:;" class="text-link2" (click)="doAdvanceQuery(searchInput.value)">高级查询</a></li>
     </ul>
   </div>
 </div>
