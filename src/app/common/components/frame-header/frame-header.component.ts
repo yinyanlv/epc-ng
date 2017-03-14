@@ -53,7 +53,11 @@ export class FrameHeaderComponent implements OnInit{
       this.subject.trigger('advance-query:show', val);
     } else {
 
-      alert('请输入内容');
+      this.subject.trigger('growl:show', {
+        type: 'error',
+        title: '错误提示',
+        content: this.placeholder
+      });
     }
   }
 
@@ -64,7 +68,11 @@ export class FrameHeaderComponent implements OnInit{
       this.subject.trigger('advance-query:show', val);
     } else {
 
-      alert('请输入内容');
+      this.subject.trigger('growl:show', {
+        type: 'error',
+        title: '错误提示',
+        content: this.placeholder
+      });
     }
   }
 

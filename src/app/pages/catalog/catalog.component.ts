@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   templateUrl: './catalog.html',
-  styleUrls: ['./catalog.scss']
+  styleUrls: ['./catalog.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CatalogComponent {
 

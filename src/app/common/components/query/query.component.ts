@@ -14,18 +14,17 @@ export class QueryComponent implements OnInit{
   private data: any;
 
   constructor(
-    private subject: SubjectService
+    private subjectService: SubjectService
   ) {
   }
 
   ngOnInit() {
 
-    this.subject.subscribe('advance-query:show', (data) => {
+    this.subjectService.subscribe('advance-query:show', (data) => {
 
       this.isShow = true;
 
       this.data = data;
     });
   }
-
 }
