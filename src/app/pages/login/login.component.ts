@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
 
 import {LoginService} from './login.service';
 import {SelectService} from '../../common/services/select.service';
@@ -69,8 +68,7 @@ export class LoginComponent implements OnInit{
           this.loginBtnText = '登录';
           this.logining = false;
 
-          this.globalState.isLogined = true;
-          this.globalState.username = params.username;
+          this.globalState.setAsLogined(params.username);
 
           if (res.success) {
 

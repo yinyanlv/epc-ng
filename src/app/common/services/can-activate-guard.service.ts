@@ -11,6 +11,6 @@ export class CanActivateGuardService implements CanActivate{
   }
 
   canActivate(): boolean {
-    return this.globalState.isLogined;
+    return this.globalState.hasLogined();
   }
 }

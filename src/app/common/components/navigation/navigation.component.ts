@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {GlobalStateService} from '../../services/global-state.service';
 import {NavigationService} from './navigation.service';
@@ -15,8 +16,9 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private globalState: GlobalStateService,
-    private navigation: NavigationService
-  ){
+    private navigation: NavigationService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -25,8 +27,14 @@ export class NavigationComponent implements OnInit {
       .loadUserInfo(this.globalState.username)
       .subscribe((res) => {
 
-        this.globalState.userInfo = res;
+        this.globalState.setUserInfo(res);
         this.userInfo = res;
       });
+  }
+
+  logout(): void {
+
+    this.globalState.setAsLogouted();
+    this.router.navigate(['login']);
   }
 }

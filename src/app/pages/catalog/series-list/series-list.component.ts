@@ -29,4 +29,14 @@ export class SeriesListComponent implements OnInit {
 
     this.seriesList = data;
   }
+
+  onCLickBrand(data) {
+
+    console.log(data);
+  }
+
+  onClickSeries(data) {
+
+    console.log(data);
+  }
 }
