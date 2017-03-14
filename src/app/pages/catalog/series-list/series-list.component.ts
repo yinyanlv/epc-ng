@@ -22,10 +22,10 @@ export class SeriesListComponent implements OnInit {
   ngOnInit() {
     this.seriesService
       .loadList()
-      .subscribe(res => this.render(res));
+      .subscribe(res => this.setSeriesList(res));
   }
 
-  render(data: Array<Object>): void {
+  setSeriesList(data: Array<Object>): void {
 
     this.seriesList = data;
   }

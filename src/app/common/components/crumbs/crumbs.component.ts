@@ -35,13 +35,12 @@ export class CrumbsComponent implements OnInit {
     });
   }
 
-  setCrumbsList(data: Array<any>): void {
+  setCrumbsList(data: Object): void {
 
     this.crumbsList = this.rebuildData(data);
-
   }
 
-  rebuildData(data: Array<any>): Array<any> {
+  rebuildData(data: Object): Array<any> {
 
     let queryParams = this.activatedRoute.snapshot.queryParams;
     let temp = [];
@@ -53,33 +52,37 @@ export class CrumbsComponent implements OnInit {
         case 'brandCode':
 
           temp.push({
+            type: 'brand',
             text: '品牌',
-            code: data[0].code,
-            name: data[0].name
+            code: data['brandCode'],
+            name: data['brandName']
           });
           break;
         case 'seriesCode':
 
           temp.push({
+            type: 'series',
             text: '车系',
-            code: data[0].series[0].code,
-            name: data[0].series[0].name
+            code: data['seriesCode'],
+            name: data['seriesName']
           });
           break;
         case 'modelGroupCode':
 
           temp.push({
+            type: 'modelGroup',
             text: '车型组',
-            code: data[0].series[0].modelGroups[0].code,
-            name: data[0].series[0].modelGroups[0].name
+            code: data['modelGroupCode'],
+            name: data['modelGroupName']
           });
           break;
         case 'modelCode':
 
           temp.push({
+            type: 'model',
             text: '车型',
-            code: data[0].series[0].modelGroups[0].models[0].code,
-            name: data[0].series[0].modelGroups[0].models[0].name
+            code: data['modelCode'],
+            name: data['modelName']
           });
           break;
         default:

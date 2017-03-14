@@ -1,7 +1,7 @@
 <div class="catalog">
   <div class="brand" id="brand-tab">
     <ul *ngIf="seriesList?.length" class="list">
-      <li *ngFor="let list of seriesList; let i = index;" [ngClass]="{'item': true, 'checked': i === 0}"><a href="javascript:;" (click)="onCLickBrand(list)">{{list.name}}</a></li>
+      <li *ngFor="let list of seriesList; let i = index;" [ngClass]="{'item': true, 'checked': i === 0}"><a href="javascript:;" (click)="onCLickBrand(list)">{{list.brandName}}</a></li>
     </ul>
   </div>
   <div class="series" *ngIf="seriesList?.length">
@@ -14,7 +14,7 @@
             <img width="130" height="95" src="{{series.imageFile}}" />
           </a>
         </div>
-        <p class="img-desc"><a href="javascript:;" class="text-link2">{{series.name}}</a></p>
+        <p class="img-desc"><a href="javascript:;" class="text-link2">{{series.seriesName}}</a></p>
       </li>
     </ul>
   </div>

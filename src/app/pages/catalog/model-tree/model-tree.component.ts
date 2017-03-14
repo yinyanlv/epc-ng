@@ -12,6 +12,8 @@ import {ModelTreeService} from './model-tree.service';
 })
 export class ModelTreeComponent {
 
+  private modelList: Array<any>;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -26,8 +28,13 @@ export class ModelTreeComponent {
       this.modelTreeService
         .loadList(params)
         .subscribe((res) => {
-          console.log(res);
+          this.setModelTree(res);
         });
     });
+  }
+
+  setModelTree(data: Array<Object>): void {
+
+    this.modelList = data;
   }
 }
