@@ -1,0 +1,21 @@
+{
+  "app": {
+    "hello": "您好！欢迎登录北汽电子配件目录信息管理系统",
+    "home": "首页",
+    "language": "语言",
+    "logout": "退出"
+  },
+  "login": {
+    "title": "北汽电子配件目录信息管理系统",
+    "username": "帐号",
+    "password": "密码",
+    "language": "语言",
+    "database": "数据库"
+  },
+  "catalog": {
+    "treeTitle": "车型"
+  },
+  "model": {
+    "treeTitle": "组别"
+  }
+}

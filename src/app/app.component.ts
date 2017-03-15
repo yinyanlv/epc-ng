@@ -1,4 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {TranslateService} from 'ng2-translate';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
     './app.component.scss'
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+  constructor(
+    private translateService: TranslateService
+  ) {
+  }
+
+  ngOnInit() {
+
+    this.translateService.addLangs(['zh', 'en']);
+    this.translateService.setDefaultLang('zh');
+  }
 }

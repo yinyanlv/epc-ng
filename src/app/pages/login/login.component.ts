@@ -1,16 +1,41 @@
 import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
+import {TranslateService} from 'ng2-translate';
+
 import {LoginService} from './login.service';
 import {SelectService} from '../../common/services/select.service';
 import {GlobalStateService} from '../../common/services/global-state.service';
+
+const langMap = {
+  zh: {
+    login: '登录',
+    logining: '登录中...',
+    errorList: [
+      '未知错误',
+      '帐号为必填项',
+      '密码为必填项',
+      '用户名或密码错误'
+    ]
+  },
+  en: {
+    login: 'login',
+    logining: 'logining...',
+    errorList: [
+     'unknown error',
+     'username is required',
+     'password is required',
+     'username or password is error'
+   ]
+ }
+};
 
 @Component({
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   @ViewChild('account') account;
   @ViewChild('password') password;
@@ -18,9 +43,9 @@ export class LoginComponent implements OnInit{
   @ViewChild('database') database;
 
   private isShowError: boolean = false;
-  private errorInfo: string = '出现未知错误';
-  private loginBtnText: string = '登录';
   private logining: boolean = false;
+  private errorInfo: string;
+  private loginBtnText: string;
   private langList;
   private databaseList;
 
@@ -29,11 +54,17 @@ export class LoginComponent implements OnInit{
     private router: Router,
     private loginService: LoginService,
     private selectService: SelectService,
-    private globalState: GlobalStateService
+    private globalState: GlobalStateService,
+    private translateService: TranslateService
   ) {
   }
 
   ngOnInit() {
+
+    let lang = this.globalState.getLanguage();
+
+    this.errorInfo = langMap[lang].errorList[0];
+    this.loginBtnText = langMap[lang].login;
 
     this.selectService
       .load('lang')
@@ -54,10 +85,12 @@ export class LoginComponent implements OnInit{
 
     if (this.logining) return;
 
+    let lang = this.globalState.getLanguage();
+
     if (this.validate()) {
 
       this.logining = true;
-      this.loginBtnText = '登录中...';
+      this.loginBtnText = langMap[lang].logining;
 
       let params = this.getParams();
 
@@ -65,19 +98,19 @@ export class LoginComponent implements OnInit{
         .login(params)
         .subscribe((res) => {
 
-          this.loginBtnText = '登录';
+          this.loginBtnText = langMap[lang].login;
           this.logining = false;
 
           this.globalState.setAsLogined(params.username);
 
           if (res.success) {
 
-            this.router.navigate(['catalog']);
+            this.router.navigate(['/catalog']);
 
           } else {
 
             this.isShowError = true;
-            this.errorInfo = '用户名或密码错误';
+            this.errorInfo = langMap[lang].errorList[3];
             this.account.nativeElement.focus();
           }
         });
@@ -86,12 +119,14 @@ export class LoginComponent implements OnInit{
 
   validate(): boolean {
 
+    let lang = this.globalState.getLanguage();
+
     this.isShowError = false;
 
     if (this.account.nativeElement.value.trim() === '') {
 
       this.isShowError = true;
-      this.errorInfo = '帐号为必填项';
+      this.errorInfo = langMap[lang].errorList[1];
       this.account.nativeElement.focus();
 
       return false;
@@ -100,7 +135,7 @@ export class LoginComponent implements OnInit{
     if (this.password.nativeElement.value.trim() === '') {
 
       this.isShowError = true;
-      this.errorInfo = '密码为必填项';
+      this.errorInfo = langMap[lang].errorList[2];
       this.password.nativeElement.focus();
 
       return false;
@@ -117,6 +152,15 @@ export class LoginComponent implements OnInit{
       lang: this.lang.value,
       database: this.database.value
     };
+  }
+
+  onChangeLang() {
+
+    let lang = this.lang.value;
+
+    this.translateService.use(lang);
+    this.globalState.setLanguage(lang);
+    this.loginBtnText = langMap[lang].login;
   }
 }
 

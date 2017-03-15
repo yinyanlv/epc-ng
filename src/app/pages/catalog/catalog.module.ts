@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+
 import {DropdownModule, DialogModule, DataTableModule, SharedModule, TreeModule, GrowlModule} from 'primeng/primeng';
+import {TranslateModule} from 'ng2-translate';
 
 import {CatalogComponent} from './catalog.component';
 import {SeriesListComponent} from './series-list/series-list.component';
@@ -32,7 +34,8 @@ import {GrowlComponent} from '../../common/components/growl/growl.component';
     DataTableModule,
     SharedModule,
     TreeModule,
-    GrowlModule
+    GrowlModule,
+    TranslateModule
   ],
   providers: [
     NavigationService

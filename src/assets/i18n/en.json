@@ -1,0 +1,21 @@
+{
+  "app": {
+    "hello": "hello! welcome to baic epc",
+    "home": "Home",
+    "language": "Language",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "BAIC EPC",
+    "username": "username",
+    "password": "password",
+    "language": "language",
+    "database": "database"
+  },
+  "catalog": {
+    "treeTitle": "Model"
+  },
+  "model": {
+    "treeTitle": "Group"
+  }
+}

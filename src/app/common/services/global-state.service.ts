@@ -9,26 +9,38 @@ export class GlobalStateService {
 
   userInfo: Object = null;
 
+  language: string = 'zh';
+
   hasLogined(): boolean {
 
     return this.isLogined;
   }
 
-  setAsLogined(username: string) {
+  setAsLogined(username: string): void {
 
     this.isLogined = true;
     this.username = username;
   }
 
-  setUserInfo(userInfo: Object) {
+  setUserInfo(userInfo: Object): void {
 
     this.userInfo = userInfo;
   }
 
-  setAsLogouted() {
+  setAsLogouted(): void {
 
     this.isLogined = false;
     this.username = null;
     this.userInfo = null;
+  }
+
+  setLanguage(lang: string): void {
+
+    this.language = lang;
+  }
+
+  getLanguage(): string {
+
+    return this.language;
   }
 }

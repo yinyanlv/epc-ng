@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 
+import {TranslateService} from 'ng2-translate';
+
 import {GlobalStateService} from '../../services/global-state.service';
 import {NavigationService} from './navigation.service';
 
@@ -17,7 +19,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private globalState: GlobalStateService,
     private navigation: NavigationService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {
   }
 
@@ -30,6 +33,14 @@ export class NavigationComponent implements OnInit {
         this.globalState.setUserInfo(res);
         this.userInfo = res;
       });
+
+    this.setLanguage(this.globalState.getLanguage());
+  }
+
+  setLanguage(lang: string): void {
+
+    this.translateService.use(lang);
+    this.globalState.setLanguage(lang);
   }
 
   logout(): void {

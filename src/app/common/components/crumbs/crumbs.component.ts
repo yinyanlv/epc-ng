@@ -47,6 +47,8 @@ export class CrumbsComponent implements OnInit {
     let queryParams = this.activatedRoute.snapshot.queryParams;
     let temp = [];
 
+    if (!data) return temp;
+
     Object.keys(queryParams).forEach((key) => {
 
       switch (key) {
@@ -99,33 +101,36 @@ export class CrumbsComponent implements OnInit {
     let urlPrefix = '/catalog';
     let queryParams = {};
 
-    switch(data.type) {
+    if (this.originalCrumbsData) {
 
-      case 'brand':
+      switch(data.type) {
 
-        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
-        break;
-      case 'series':
+        case 'brand':
 
-        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
-        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
-        break;
-      case 'modelGroup':
+          queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+          break;
+        case 'series':
 
-        urlPrefix = '/model';
-        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
-        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
-        queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
-        break;
-      case 'model':
+          queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+          queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+          break;
+        case 'modelGroup':
 
-        urlPrefix = '/model';
-        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
-        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
-        queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
-        queryParams['modelCode'] = this.originalCrumbsData['modelCode'];
-        break;
-      default:
+          urlPrefix = '/model';
+          queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+          queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+          queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
+          break;
+        case 'model':
+
+          urlPrefix = '/model';
+          queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+          queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+          queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
+          queryParams['modelCode'] = this.originalCrumbsData['modelCode'];
+          break;
+        default:
+      }
     }
 
     this.setUrl(urlPrefix, queryParams);

@@ -1,5 +1,5 @@
 <div class="model">
-  <div class="model-head">车型</div>
+  <div class="model-head">{{'catalog.treeTitle' | translate}}</div>
   <div class="model-body" id="model-body">
     <ul *ngFor="let modelGroup of modelList" class="type-list">
       <li class="type-item" [class.checked]="modelGroup.active">

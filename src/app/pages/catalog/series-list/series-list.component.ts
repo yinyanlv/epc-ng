@@ -34,7 +34,10 @@ export class SeriesListComponent implements OnInit {
 
       if (!params['brandCode'] || !params['seriesCode']) {
 
-        this.setQueryString(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
+        if (this.seriesList) {
+
+          this.setQueryString(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
+        }
 
         return;
       }

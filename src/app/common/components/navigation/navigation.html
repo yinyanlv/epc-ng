@@ -1,20 +1,20 @@
 <div class="page-navigation clearfix">
   <div class="nav-info">
-    <span class="text">{{userInfo?.realName}} 您好！欢迎登录北汽电子配件目录信息管理系统</span>
+    <span class="text">{{userInfo?.realName}} {{'app.hello' | translate}}</span>
   </div>
   <div class="nav-list-wrap">
     <ul class="nav-list">
-      <li class="nav-list-item"><a class="text-link2" [routerLink]="['/catalog']">首页</a></li>
+      <li class="nav-list-item"><a class="text-link2" [routerLink]="['/catalog']">{{'app.home' | translate}}</a></li>
       <li class="nav-list-item nav-lang">
-        <a href="javascript:;" class="text-link2">语言<span class="arrow"></span></a>
+        <a href="javascript:;" class="text-link2">{{'app.language' | translate}}<span class="arrow"></span></a>
         <div class="nav-item-layer">
           <ul class="nav-layer-list">
-            <li><a href="javascript:;">中文</a></li>
-            <li><a href="javascript:;">English</a></li>
+            <li (click)="setLanguage('zh')"><a href="javascript:;">中文</a></li>
+            <li (click)="setLanguage('en')"><a href="javascript:;">English</a></li>
           </ul>
         </div>
       </li>
-      <li class="nav-list-item"><a href="javascript:;" class="text-link2" (click)="logout()">退出</a></li>
+      <li class="nav-list-item"><a href="javascript:;" class="text-link2" (click)="logout()">{{'app.logout' | translate}}</a></li>
     </ul>
   </div>
 </div>
