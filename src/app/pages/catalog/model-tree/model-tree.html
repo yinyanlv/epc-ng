@@ -1,11 +1,10 @@
 <div class="model">
   <div class="model-head">车型</div>
   <div class="model-body" id="model-body">
-    <div class="all-model"><a class="text-link2" data-id="all-model" [routerLink]="['/catalog']">全部车型</a></div>
     <ul *ngFor="let modelGroup of modelList" class="type-list">
-      <li class="type-item">
+      <li class="type-item" [class.checked]="modelGroup.active">
         <div>
-          <span class="type">
+          <span class="type" (click)="modelGroup.active = !modelGroup.active">
             <span class="icon"></span>
             <a [routerLink]="['model']" class="link">{{modelGroup.modelGroupName}}</a>
           </span>

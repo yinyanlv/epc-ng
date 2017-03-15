@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {SeriesListService} from './series-list.service';
 
@@ -13,30 +14,60 @@ import {SeriesListService} from './series-list.service';
 export class SeriesListComponent implements OnInit {
 
   private seriesList: Array<Object> = null;
+  private activeBrandCode: string;
+  private activeSeriesCode: string;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private seriesService: SeriesListService
   ) {
   }
 
   ngOnInit() {
+
     this.seriesService
       .loadList()
       .subscribe(res => this.setSeriesList(res));
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+
+      if (!params['brandCode'] || !params['seriesCode']) {
+
+        this.setQueryString(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
+
+        return;
+      }
+
+      this.activeBrandCode = params['brandCode'];
+      this.activeSeriesCode = params['seriesCode'];
+    });
   }
 
   setSeriesList(data: Array<Object>): void {
 
     this.seriesList = data;
+
+    this.setQueryString(data[0]['brandCode'], data[0]['series'][0]['seriesCode']);
   }
 
-  onCLickBrand(data) {
+  onCLickBrand(data): void {
 
-    console.log(data);
+    this.setQueryString(data.brandCode, data.series[0].seriesCode);
   }
 
-  onClickSeries(data) {
+  onClickSeries(data): void {
 
-    console.log(data);
+    this.setQueryString(this.activeBrandCode, data.seriesCode);
+  }
+
+  setQueryString(brandCode: string, seriesCode: string): void {
+
+    this.router.navigate(['/catalog'], {
+      queryParams: {
+        brandCode: brandCode,
+        seriesCode: seriesCode
+      }
+    });
   }
 }

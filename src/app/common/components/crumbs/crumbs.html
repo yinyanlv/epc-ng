@@ -3,7 +3,7 @@
     <ul *ngIf="crumbsList.length" class="list">
       <li *ngFor="let item of crumbsList;" class="item">
         <span class="label">{{item.text}}：</span>
-        <a href="javascript:;" class="text-link2">{{item.name}}</a>
+        <a href="javascript:;" class="text-link2" (click)="onClickItem(item)">{{item.name}}</a>
       </li>
     </ul>
   </div>

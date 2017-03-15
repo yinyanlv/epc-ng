@@ -15,6 +15,7 @@ import {CrumbsService} from './crumbs.service';
 export class CrumbsComponent implements OnInit {
 
   private crumbsList: Array<any> = [];
+  private originalCrumbsData: Object;
 
   constructor(
     private router: Router,
@@ -37,6 +38,7 @@ export class CrumbsComponent implements OnInit {
 
   setCrumbsList(data: Object): void {
 
+    this.originalCrumbsData = data;
     this.crumbsList = this.rebuildData(data);
   }
 
@@ -90,5 +92,49 @@ export class CrumbsComponent implements OnInit {
     });
 
     return temp;
+  }
+
+  onClickItem(data: any): void {
+
+    let urlPrefix = '/catalog';
+    let queryParams = {};
+
+    switch(data.type) {
+
+      case 'brand':
+
+        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+        break;
+      case 'series':
+
+        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+        break;
+      case 'modelGroup':
+
+        urlPrefix = '/model';
+        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+        queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
+        break;
+      case 'model':
+
+        urlPrefix = '/model';
+        queryParams['brandCode'] = this.originalCrumbsData['brandCode'];
+        queryParams['seriesCode'] = this.originalCrumbsData['seriesCode'];
+        queryParams['modelGroupCode'] = this.originalCrumbsData['modelGroupCode'];
+        queryParams['modelCode'] = this.originalCrumbsData['modelCode'];
+        break;
+      default:
+    }
+
+    this.setUrl(urlPrefix, queryParams);
+  }
+
+  setUrl(urlPrefix: string, queryParams: Object): void {
+
+    this.router.navigate([urlPrefix], {
+      queryParams: queryParams
+    });
   }
 }
