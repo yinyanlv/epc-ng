@@ -296,6 +296,17 @@ input::-ms-clear, input::-ms-reveal {
 }
 .layer-operation .btn {
   margin: 0 5px;
+  color: #fff;
+  background: #186ba0;
+  border: 1px solid #156090;
+  line-height: 24px;
+  height:26px;
+  padding:0 12px;
+}
+
+.layer-operation .btn:hover{
+  background: #186ba0;
+  border: 1px solid #156090;
 }
 .layer-upload-form {
   margin: 0;
@@ -648,6 +659,7 @@ input::-ms-clear, input::-ms-reveal {
   min-height: 28px;
   line-height: 28px;
   font-size: 0;
+  float:left;
 }
 .data-item .label {
   display: inline-block;

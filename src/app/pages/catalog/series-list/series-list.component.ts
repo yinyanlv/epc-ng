@@ -51,7 +51,7 @@ export class SeriesListComponent implements OnInit {
 
     this.seriesList = data;
 
-    this.setQueryString(data[0]['brandCode'], data[0]['series'][0]['seriesCode']);
+    this.setQueryString(this.activeBrandCode || this.seriesList[0]['brandCode'], this.activeSeriesCode || this.seriesList[0]['series'][0]['seriesCode']);
   }
 
   onCLickBrand(data): void {

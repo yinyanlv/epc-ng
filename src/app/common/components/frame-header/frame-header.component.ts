@@ -63,17 +63,7 @@ export class FrameHeaderComponent implements OnInit{
 
   doAdvanceQuery(val: string) {
 
-    if (this.isValid(val)) {
-
-      this.subject.trigger('advance-query:show', val);
-    } else {
-
-      this.subject.trigger('growl:show', {
-        type: 'error',
-        title: '错误提示',
-        content: this.placeholder
-      });
-    }
+    this.subject.trigger('advance-query:show', val);
   }
 
   isValid(val: string) {

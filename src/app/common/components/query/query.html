@@ -1,8 +1,62 @@
 <p-dialog [modal]="true" [closeOnEscape]="true" [(visible)]="isShow">
   <p-header>高级查询</p-header>
-  <form>
-    {{data}}
-  </form>
+  <div>
+    <div class="grid-search clearfix">
+      <div class="data-item required">
+        <span class="label">
+          <span title="品牌" class="text">品牌：</span>
+        </span>
+        <span class="form-select">
+          <p-dropdown [options]="brandList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('brand')"></p-dropdown>
+        </span>
+      </div>
+      <div class="data-item">
+        <span class="label">
+          <span title="车系" class="text">车系：</span>
+        </span>
+        <span class="form-select">
+          <p-dropdown [options]="seriesList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('series')"></p-dropdown>
+        </span>
+      </div>
+      <div class="data-item">
+        <span class="label">
+          <span title="车型组" class="text">车型组：</span>
+        </span>
+        <span class="form-select">
+          <p-dropdown [options]="modelGroupList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('modelGroup')"></p-dropdown>
+        </span>
+      </div>
+      <div class="data-item">
+        <span class="label">
+          <span title="车型" class="text">车型：</span>
+        </span>
+        <span class="form-select">
+           <p-dropdown [options]="modelList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('model')"></p-dropdown>
+        </span>
+      </div>
+
+      <div class="data-item">
+        <span class="label">
+          <span title="配件编码：" class="text">配件编码：</span>
+        </span>
+        <span class="form-select">
+          <input type="text" pInputText />
+        </span>
+      </div>
+      <div class="data-item">
+        <span class="label">
+          <span title="配件名称" class="text">配件名称：</span>
+        </span>
+        <span class="form-select">
+           <input type="text" pInputText />
+        </span>
+      </div>
+    </div>
+    <div class="layer-operation">
+      <a class="btn" href="javascript:;" data-id="search">查询</a>
+      <a class="btn" href="javascript:;" data-id="reset">重置</a>
+    </div>
+  </div>
 
   <p-dataTable [value]="[]" [rows]="10" [paginator]="true" [style]="{width: '1000px'}">
     <p-column field="rowNumber" header="序号"></p-column>
