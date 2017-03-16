@@ -13,6 +13,7 @@ import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {LoginModule} from './pages/login/login.module';
 import {CatalogModule} from './pages/catalog/catalog.module';
+import {ModelModule} from './pages/model/model.module';
 import {NotFoundModule} from './pages/not-found/not-found.module';
 import {SubjectService} from './common/services/subject.service';
 import {GlobalStateService} from './common/services/global-state.service';
@@ -39,6 +40,7 @@ import {createTranslateLoader} from './common/utils/translate';
     routing,
     LoginModule,
     CatalogModule,
+    ModelModule,
     NotFoundModule
   ],
   providers: [

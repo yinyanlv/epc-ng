@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {LoginComponent} from './pages/login/login.component';
 import {CatalogComponent} from './pages/catalog/catalog.component';
+import {ModelComponent} from './pages/model/model.component';
 import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {CanActivateGuardService} from './common/services/can-activate-guard.service';
 
@@ -16,7 +17,11 @@ const routes: Routes = [{
 }, {
   path: 'catalog',
   component: CatalogComponent,
+  // loadChildren: './pages/catalog/catalog.module#CatalogModule',
   // canActivate: [CanActivateGuardService]
+}, {
+  path: 'model',
+  component: ModelComponent
 }, {
   path: '**',
   component: NotFoundComponent

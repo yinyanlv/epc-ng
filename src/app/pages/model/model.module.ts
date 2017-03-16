@@ -6,16 +6,20 @@ import {RouterModule} from '@angular/router';
 import {TranslateModule} from 'ng2-translate';
 
 import {AppSharedModule} from '../../common/modules/app-shared.module';
-import {CatalogComponent} from './catalog.component';
-import {SeriesListComponent} from './series-list/series-list.component';
-import {ModelTreeComponent} from './model-tree/model-tree.component';
+import {ModelComponent} from './model.component';
+import {LegendListComponent} from './legend-list/legend-list.component';
+import {GroupTreeComponent} from './group-tree/group-tree.component';
+import {InfoListComponent} from './info-list/info-list.component';
+import {LegendComponent} from './legend/legend.component';
 import {NavigationService} from '../../common/components/navigation/navigation.service';
 
 @NgModule({
   declarations: [
-    CatalogComponent,
-    SeriesListComponent,
-    ModelTreeComponent
+    ModelComponent,
+    LegendListComponent,
+    GroupTreeComponent,
+    InfoListComponent,
+    LegendComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +32,6 @@ import {NavigationService} from '../../common/components/navigation/navigation.s
     NavigationService
   ]
 })
-export class CatalogModule {
+export class ModelModule {
 
 }

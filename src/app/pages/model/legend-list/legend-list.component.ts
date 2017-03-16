@@ -1,17 +1,17 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {SeriesListService} from './series-list.service';
+import {LegendListService} from './legend-list.service';
 
 @Component({
-  selector: 'series-list',
-  templateUrl: './series-list.html',
+  selector: 'legend-list',
+  templateUrl: './legend-list.html',
   encapsulation: ViewEncapsulation.None,
   providers: [
-    SeriesListService
+    LegendListService
   ]
 })
-export class SeriesListComponent implements OnInit {
+export class LegendListComponent implements OnInit {
 
   private seriesList: Array<Object> = null;
   private activeBrandCode: string;
@@ -20,13 +20,13 @@ export class SeriesListComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private seriesService: SeriesListService
+    private legendListService: LegendListService
   ) {
   }
 
   ngOnInit() {
 
-    this.seriesService
+    this.legendListService
       .loadList()
       .subscribe(res => this.setSeriesList(res));
 
