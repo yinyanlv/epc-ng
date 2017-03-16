@@ -7,7 +7,7 @@
           <span title="品牌" class="text">品牌：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="brandList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('brand')"></p-dropdown>
+          <p-dropdown [options]="brandList" [(ngModel)]="brand" [style]="{width: '160px'}" (onFocus)="onSelectFocus('brand')"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -15,7 +15,7 @@
           <span title="车系" class="text">车系：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="seriesList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('series')"></p-dropdown>
+          <p-dropdown [options]="seriesList" [(ngModel)]="series" [style]="{width: '160px'}" (onFocus)="onSelectFocus('series')"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -23,7 +23,7 @@
           <span title="车型组" class="text">车型组：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="modelGroupList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('modelGroup')"></p-dropdown>
+          <p-dropdown [options]="modelGroupList" [(ngModel)]="modelGroup" [style]="{width: '160px'}" (onFocus)="onSelectFocus('modelGroup')"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -31,7 +31,7 @@
           <span title="车型" class="text">车型：</span>
         </span>
         <span class="form-select">
-           <p-dropdown [options]="modelList" [style]="{width: '160px'}" (onFocus)="onSelectFocus('model')"></p-dropdown>
+           <p-dropdown [options]="modelList" [(ngModel)]="model" [style]="{width: '160px'}" (onFocus)="onSelectFocus('model')"></p-dropdown>
         </span>
       </div>
 
@@ -40,7 +40,7 @@
           <span title="配件编码：" class="text">配件编码：</span>
         </span>
         <span class="form-select">
-          <input type="text" pInputText />
+          <input type="text" name="partNo" [(ngModel)]="partNo" pInputText />
         </span>
       </div>
       <div class="data-item">
@@ -48,13 +48,13 @@
           <span title="配件名称" class="text">配件名称：</span>
         </span>
         <span class="form-select">
-           <input type="text" pInputText />
+           <input type="text" name="partName" [(ngModel)]="partName" pInputText />
         </span>
       </div>
     </div>
     <div class="layer-operation">
-      <a class="btn" href="javascript:;" data-id="search">查询</a>
-      <a class="btn" href="javascript:;" data-id="reset">重置</a>
+      <a class="btn" href="javascript:;" (click)="onClickQuery()">查询</a>
+      <a class="btn" href="javascript:;" (click)="onClickReset()">重置</a>
     </div>
   </div>
 

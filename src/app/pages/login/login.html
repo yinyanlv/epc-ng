@@ -35,13 +35,13 @@
           <div class="row row-login">
             <div class="cell label">{{'login.language' | translate}}:</div>
             <div class="cell textbox">
-              <p-dropdown [options]="langList" [style]="{width: '182px'}" #lang (onChange)="onChangeLang()"></p-dropdown>
+              <p-dropdown [options]="langList" [style]="{width: '182px'}" [(ngModel)]="lang" (onChange)="onChangeLang()"></p-dropdown>
             </div>
           </div>
           <div class="row row-login">
             <div class="cell label">{{'login.database' | translate}}:</div>
             <div class="cell textbox">
-              <p-dropdown [options]="databaseList" [style]="{width: '182px'}" #database></p-dropdown>
+              <p-dropdown [options]="databaseList" [style]="{width: '182px'}" [(ngModel)]="database"></p-dropdown>
             </div>
           </div>
           <div class="row row-login" style="padding: 10px 0 5px;">

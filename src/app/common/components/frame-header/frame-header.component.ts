@@ -50,7 +50,11 @@ export class FrameHeaderComponent implements OnInit{
 
     if (this.isValid(val)) {
 
-      this.subject.trigger('advance-query:show', val);
+      this.subject.trigger('advance-query:show', {
+        type: 'query',
+        name: this.searchType.value,
+        value: val
+      });
     } else {
 
       this.subject.trigger('growl:show', {
@@ -61,9 +65,11 @@ export class FrameHeaderComponent implements OnInit{
     }
   }
 
-  doAdvanceQuery(val: string) {
+  doAdvanceQuery() {
 
-    this.subject.trigger('advance-query:show', val);
+    this.subject.trigger('advance-query:show', {
+      type: 'advance-query'
+    });
   }
 
   isValid(val: string) {

@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 
 import {DropdownModule, DialogModule, DataTableModule, SharedModule, TreeModule, GrowlModule} from 'primeng/primeng';
@@ -28,6 +29,7 @@ import {GrowlComponent} from '../../common/components/growl/growl.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,  // 不导入则不能使用[routerLink]指令
     DropdownModule,
     DialogModule,

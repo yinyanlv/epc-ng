@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {TranslateService} from 'ng2-translate';
@@ -35,19 +35,20 @@ const langMap = {
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit {
-
-  @ViewChild('account') account;
-  @ViewChild('password') password;
-  @ViewChild('lang') lang;
-  @ViewChild('database') database;
+export class LoginComponent implements OnInit, DoCheck {
 
   private isShowError: boolean = false;
   private logining: boolean = false;
   private errorInfo: string;
   private loginBtnText: string;
+  private lang: string;
+  private database: string;
   private langList;
   private databaseList;
+
+  @ViewChild('account') account;
+  @ViewChild('password') password;
+
 
   constructor(
     private el: ElementRef,
@@ -70,15 +71,20 @@ export class LoginComponent implements OnInit {
       .load('lang')
       .subscribe((res) => {
         this.langList = res;
-        this.lang.value = this.langList[0].value;
+        this.lang = this.langList[0].value;
       });
 
     this.selectService
       .load('database')
       .subscribe((res) => {
         this.databaseList = res;
-        this.database.value = this.databaseList[0].value;
+        this.database = this.databaseList[0].value;
       });
+  }
+
+  ngDoCheck() {
+
+    this.lang = this.globalState.getLanguage();
   }
 
   login(): void {
@@ -149,14 +155,14 @@ export class LoginComponent implements OnInit {
     return {
       username: this.account.nativeElement.value,
       password: this.password.nativeElement.value,
-      lang: this.lang.value,
-      database: this.database.value
+      lang: this.lang,
+      database: this.database
     };
   }
 
   onChangeLang() {
 
-    let lang = this.lang.value;
+    let lang = this.lang;
 
     this.translateService.use(lang);
     this.globalState.setLanguage(lang);

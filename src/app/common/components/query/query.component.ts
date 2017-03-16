@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 
 import {SubjectService} from '../../services/subject.service';
 import {QueryService} from './query.service';
@@ -15,11 +15,16 @@ import {QueryService} from './query.service';
 export class QueryComponent implements OnInit{
 
   private isShow: boolean = false;
-  private data: any;
+  private partNo: string;
+  private partName: any;
   private brandList: Array<Object>;
   private seriesList: Array<Object>;
   private modelGroupList: Array<Object>;
   private modelList: Array<Object>;
+  private brand: string;
+  private series: string;
+  private modelGroup: string;
+  private model: string;
 
   constructor(
     private subjectService: SubjectService,
@@ -33,7 +38,10 @@ export class QueryComponent implements OnInit{
 
       this.isShow = true;
 
-      this.data = data;
+      if (data.type === 'query') {
+
+        data.name === 'part-no' ? (this.partNo = data.value) : (this.partName = data.value);
+      }
     });
   }
 
@@ -58,13 +66,33 @@ export class QueryComponent implements OnInit{
         break;
       case 'modelGroup':
           this.modelGroupList = data;
-
         break;
       case 'model':
           this.modelList = data;
         break;
       default:
     }
+  }
+
+  onClickQuery() {
+
+  }
+
+  onClickReset() {
+
+    this.brand = '';
+    this.series = '';
+    this.modelGroup = '';
+    this.model = '';
+    this.partNo = '';
+    this.partName = '';
+  }
+
+  getParams() {
+
+  }
+
+  validate() {
 
   }
 }
