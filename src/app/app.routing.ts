@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 
 import {LoginComponent} from './pages/login/login.component';
 import {CatalogComponent} from './pages/catalog/catalog.component';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
 import {CanActivateGuardService} from './common/services/can-activate-guard.service';
 
 const routes: Routes = [{
@@ -18,7 +19,7 @@ const routes: Routes = [{
   // canActivate: [CanActivateGuardService]
 }, {
   path: '**',
-  component: CatalogComponent
+  component: NotFoundComponent
 }];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {

@@ -7,12 +7,13 @@ import {HttpModule, Http} from '@angular/http';
 
 import {DropdownModule} from 'primeng/primeng';
 import {DialogModule} from 'primeng/primeng';
-import {TranslateModule, TranslateLoader, TranslateStaticLoader,} from 'ng2-translate';
+import {TranslateModule, TranslateLoader} from 'ng2-translate';
 
 import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {LoginModule} from './pages/login/login.module';
-import {CatalogModule} from './pages/catalog/catalog.module'
+import {CatalogModule} from './pages/catalog/catalog.module';
+import {NotFoundModule} from './pages/not-found/not-found.module';
 import {SubjectService} from './common/services/subject.service';
 import {GlobalStateService} from './common/services/global-state.service';
 import {CanActivateGuardService} from './common/services/can-activate-guard.service';
@@ -37,7 +38,8 @@ import {createTranslateLoader} from './common/utils/translate';
     }),
     routing,
     LoginModule,
-    CatalogModule
+    CatalogModule,
+    NotFoundModule
   ],
   providers: [
     SubjectService,

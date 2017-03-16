@@ -6,12 +6,12 @@
         <div>
           <span class="type" (click)="modelGroup.active = !modelGroup.active">
             <span class="icon"></span>
-            <a [routerLink]="['model']" class="link">{{modelGroup.modelGroupName}}</a>
+            <a [routerLink]="['/model']" class="link">{{modelGroup.modelGroupName}}</a>
           </span>
         </div>
         <ul *ngFor="let model of modelGroup.models" class="model-list">
           <li class="model-item"><span class="icon"></span>
-            <a [routerLink]="['model']" class="link">{{model.modelName}}</a>
+            <a [routerLink]="['/model']" class="link">{{model.modelName}}</a>
           </li>
         </ul>
       </li>
