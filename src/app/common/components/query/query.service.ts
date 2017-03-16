@@ -7,6 +7,8 @@ import {HandleErrorService} from '../../services/handle-error.service';
 @Injectable()
 export class QueryService {
 
+  private queryUrl = serverMap.basePath + '/query/load';
+
   constructor(
     private http: Http,
     private handleError: HandleErrorService
@@ -25,6 +27,23 @@ export class QueryService {
 
     return this.http
       .get(selectorUrl, {
+        search: temp
+      })
+      .map(res => res.json().data)
+      .catch(this.handleError.handler);
+  }
+
+  query(params: Object) {
+
+    let temp = new URLSearchParams();
+
+    Object.keys(params).forEach((key) => {
+
+      temp.set(key, params[key]);
+    });
+
+    return this.http
+      .get(this.queryUrl, {
         search: temp
       })
       .map(res => res.json().data)

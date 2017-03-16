@@ -15,7 +15,7 @@ export class FrameHeaderComponent implements OnInit{
   private searchType;
 
   constructor(
-    private subject: SubjectService
+    private subjectService: SubjectService
   ) {
   }
 
@@ -50,14 +50,14 @@ export class FrameHeaderComponent implements OnInit{
 
     if (this.isValid(val)) {
 
-      this.subject.trigger('advance-query:show', {
+      this.subjectService.trigger('advance-query:show', {
         type: 'query',
         name: this.searchType.value,
         value: val
       });
     } else {
 
-      this.subject.trigger('growl:show', {
+      this.subjectService.trigger('growl:show', {
         type: 'error',
         title: '错误提示',
         content: this.placeholder
@@ -67,7 +67,7 @@ export class FrameHeaderComponent implements OnInit{
 
   doAdvanceQuery() {
 
-    this.subject.trigger('advance-query:show', {
+    this.subjectService.trigger('advance-query:show', {
       type: 'advance-query'
     });
   }

@@ -26,3 +26,11 @@
   font-size:12px;
   line-height: 22px;
 }
+
+.ui-datatable .ui-datatable-thead > tr > th{
+  text-align: left;
+}
+
+.ui-datatable table{
+  table-layout: auto;
+}

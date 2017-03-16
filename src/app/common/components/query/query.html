@@ -7,7 +7,7 @@
           <span title="品牌" class="text">品牌：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="brandList" [(ngModel)]="brand" [style]="{width: '160px'}" (onFocus)="onSelectFocus('brand')"></p-dropdown>
+          <p-dropdown [options]="brandList" [(ngModel)]="brand" #brandElem [style]="{width: '160px'}" (onChange)="onSelectChange(['series', 'modelGroup', 'model'], {'brandCode': brandElem.value})"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -15,7 +15,7 @@
           <span title="车系" class="text">车系：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="seriesList" [(ngModel)]="series" [style]="{width: '160px'}" (onFocus)="onSelectFocus('series')"></p-dropdown>
+          <p-dropdown [options]="seriesList" [(ngModel)]="series" #seriesElem [style]="{width: '160px'}" (onChange)="onSelectChange(['modelGroup', 'model'], {'seriesCode': seriesElem.value})"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -23,7 +23,7 @@
           <span title="车型组" class="text">车型组：</span>
         </span>
         <span class="form-select">
-          <p-dropdown [options]="modelGroupList" [(ngModel)]="modelGroup" [style]="{width: '160px'}" (onFocus)="onSelectFocus('modelGroup')"></p-dropdown>
+          <p-dropdown [options]="modelGroupList" [(ngModel)]="modelGroup" #modelGroupElem [style]="{width: '160px'}" (onChange)="onSelectChange(['model'], {'modelGroupCode': modelGroupElem.value})"></p-dropdown>
         </span>
       </div>
       <div class="data-item">
@@ -31,7 +31,7 @@
           <span title="车型" class="text">车型：</span>
         </span>
         <span class="form-select">
-           <p-dropdown [options]="modelList" [(ngModel)]="model" [style]="{width: '160px'}" (onFocus)="onSelectFocus('model')"></p-dropdown>
+           <p-dropdown [options]="modelList" [(ngModel)]="model"  #modelElem  [style]="{width: '160px'}"></p-dropdown>
         </span>
       </div>
 
@@ -58,19 +58,13 @@
     </div>
   </div>
 
-  <p-dataTable [value]="[]" [rows]="10" [paginator]="true" [style]="{width: '1000px'}">
-    <p-column field="rowNumber" header="序号"></p-column>
-    <p-column field="partNo" header="配件编码"></p-column>
-    <p-column field="partName" header="配件名称"></p-column>
-    <p-column field="qty" header="用量"></p-column>
-    <p-column field="startDate" header="开始时间"></p-column>
-    <p-column field="endDate" header="结束时间"></p-column>
+  <p-dataTable [value]="queryResult" [rows]="8" [paginator]="true" [style]="{width: '1000px'}">
+    <p-column field="rowNumber"  header="序号"></p-column>
     <p-column field="brandName" header="品牌"></p-column>
     <p-column field="seriesName" header="车系"></p-column>
     <p-column field="modelGroupName" header="车型组"></p-column>
     <p-column field="modelName" header="车型"></p-column>
-    <p-column field="imageCode" header="图例编码"></p-column>
-    <p-column field="imageName" header="图例名称"></p-column>
-    <p-column field="partUsageName" header="用法名称"></p-column>
+    <p-column field="partNo" header="配件编码"></p-column>
+    <p-column field="partName" header="配件名称"></p-column>
   </p-dataTable>
 </p-dialog>
