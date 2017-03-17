@@ -1,89 +1,44 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
 
-import {LegendListService} from './legend-list.service';
+import {SubjectService} from '../../../common/services/subject.service';
 
 @Component({
   selector: 'legend-list',
   templateUrl: './legend-list.html',
-  encapsulation: ViewEncapsulation.None,
-  providers: [
-    LegendListService
-  ]
+  encapsulation: ViewEncapsulation.None
 })
 export class LegendListComponent implements OnInit {
 
-  private seriesList: Array<Object> = null;
-  private activeBrandCode: string;
-  private activeSeriesCode: string;
+  private legendList: Array<Object> = [];
+  private isShow: boolean = true;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private legendListService: LegendListService
+    private subjectService: SubjectService
   ) {
   }
 
   ngOnInit() {
+    this.subjectService.subscribe('legend-list:show', (data) => {
 
-    this.legendListService
-      .loadList()
-      .subscribe(res => this.setSeriesList(res));
+      this.setLegendList(data);
+      this.isShow = true;
+    });
 
-    this.activatedRoute.queryParams.subscribe((params) => {
+    this.subjectService.subscribe('legend-list:hide', () => {
 
-      if (!params['brandCode']) {
-
-        if (this.seriesList) {  // 不带任何参数跳转时，默认显示第一个品牌的第一个车系
-
-            this.setQueryString(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
-        }
-
-        return;
-      } else if (!params['seriesCode']) {  // 只有brandCode参数时，默认显示该品牌的第一个车系
-
-        let matchedItem;
-
-        this.seriesList.forEach((item, index) => {
-          if (item['brandCode'] === params['brandCode']) {
-            matchedItem = this.seriesList[index];
-          }
-        });
-
-        this.setQueryString(params['brandCode'], matchedItem['series'][0]['seriesCode']);
-
-        return;
-      }
-
-      this.activeBrandCode = params['brandCode'];
-      this.activeSeriesCode = params['seriesCode'];
+      this.isShow = false;
     });
   }
 
-  setSeriesList(data: Array<Object>): void {
+  setLegendList(data: Array<Object>): void {
 
-    this.seriesList = data;
-
-    this.setQueryString(this.activeBrandCode || this.seriesList[0]['brandCode'], this.activeSeriesCode || this.seriesList[0]['series'][0]['seriesCode']);
+    this.legendList = data;
   }
 
-  onCLickBrand(data): void {
+  onClickItem(data: Object): void {
 
-    this.setQueryString(data.brandCode, data.series[0]['seriesCode']);
-  }
+    this.isShow = false;
 
-  onClickSeries(data): void {
-
-    this.setQueryString(this.activeBrandCode, data.seriesCode);
-  }
-
-  setQueryString(brandCode: string, seriesCode: string): void {
-
-    this.router.navigate(['/catalog'], {
-      queryParams: {
-        brandCode: brandCode,
-        seriesCode: seriesCode
-      }
-    });
+    this.subjectService.trigger('legend:show', data);
   }
 }

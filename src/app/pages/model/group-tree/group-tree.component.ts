@@ -1,40 +1,63 @@
-import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 
 import {GroupTreeService} from './group-tree.service';
+import {SubjectService} from '../../../common/services/subject.service';
 
 @Component({
   selector: 'group-tree',
   templateUrl: './group-tree.html',
+  styleUrls: ['./group-tree.scss'],
   providers: [
     GroupTreeService
   ]
 })
-export class GroupTreeComponent {
+export class GroupTreeComponent implements OnInit {
 
-  private modelList: Array<any>;
+  private groupList: Array<any> = [];
+  private checkedNodeCode: string = '';
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private groupTreeService: GroupTreeService
+    private groupTreeService: GroupTreeService,
+    private subjectService: SubjectService
   ) {
   }
 
   ngOnInit() {
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-
-      this.groupTreeService
-        .loadList(params)
-        .subscribe((res) => {
-          this.setModelTree(res);
-        });
-    });
+    this.groupTreeService
+      .loadList({})
+      .subscribe((res) => {
+        this.setGroupTree(res);
+      });
   }
 
-  setModelTree(data: Array<Object>): void {
+  setGroupTree(data: Array<Object>): void {
 
-    this.modelList = data;
+    this.checkedNodeCode = data[0]['code'];
+    this.onClickNode('group', data[0]);
+    this.groupList = data;
+  }
+
+  onClickNode(type: string, data: Object) {
+
+    if (type === 'group') {
+
+      this.subjectService.trigger('legend:hide', null);
+      this.subjectService.trigger('usage-list:hide', null);
+      this.subjectService.trigger('legend-list:show', data['subGroup']);
+    }
+
+    if (type === 'sub-group') {
+
+      this.subjectService.trigger('legend:hide', null);
+      this.subjectService.trigger('usage-list:hide', null);
+      this.subjectService.trigger('legend-list:show', [data]);
+    }
+
+    if (type === 'image') {
+
+      this.subjectService.trigger('legend-list:hide', null);
+      this.subjectService.trigger('legend:show', data);
+    }
   }
 }

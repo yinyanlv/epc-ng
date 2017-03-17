@@ -12,5 +12,39 @@
   <app-root>
     <img src="assets/images/app_loading.gif" style="position: absolute;left:50%;top:50%;margin-left:-40px;margin-top:-40px;">
   </app-root>
+
+  <script type="text/javascript" src="assets/scripts/libs/public/require-2.0.6.min.js"></script>
+  <script type="text/javascript">
+    requirejs.config({
+      baseUrl: './assets/scripts/',
+      waitSeconds:30,
+      paths: {
+        jquery: 'libs/public/jquery-1.11.3.min.js',
+        json2: 'libs/public/json2.js',
+        domReady: 'libs/public/domReady.js',
+        text: "libs/public/text.min.js",
+        showLoading: "component/public/showLoading/jquery.showLoading.min.js",
+        jquerySvgZoomDrag: 'component/private/svgzoomdrag/js/jquery.svgzoomdrag.min.js',
+        jquerySvgHotpoint: 'component/private/svghotpoint/js/jquery.svghotpoint.min.js',
+        scrollIntoView: "libs/public/jquery.scrollIntoView.js",
+        d3: "component/public/d3/d3.v3.min.js",
+        snap: "component/public/snapSvg/snap.svg.js",
+        mousewheel: "libs/public/jquery.mousewheel.js",
+        normalize: "libs/public/normalize.js"
+      },
+      shim: {
+        jquery:{
+          exports:"$"
+        },
+        scrollIntoView:['jquery'],
+        jquerySvgZoomDrag: ['jquery', 'showLoading'],
+        jquerySvgHotpoint: ['jquery'],
+        mousewheel: ['jquery'],
+        showLoading: ['jquery']
+      }
+    });
+
+    require(['jquerySvgHotpoint', 'scrollIntoView', 'snap']);
+  </script>
 </body>
 </html>

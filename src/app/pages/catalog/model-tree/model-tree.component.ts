@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {ModelTreeService} from './model-tree.service';
@@ -10,9 +10,9 @@ import {ModelTreeService} from './model-tree.service';
     ModelTreeService
   ]
 })
-export class ModelTreeComponent {
+export class ModelTreeComponent implements OnInit {
 
-  private modelList: Array<any>;
+  private modelList: Array<any> = [];
 
   constructor(
     private router: Router,

@@ -7,7 +7,7 @@ import {HandleErrorService} from '../../../common/services/handle-error.service'
 @Injectable()
 export class GroupTreeService {
 
-  private modelListUrl = serverMap.basePath + '/catalog/model/getList';
+  private groupListUrl = serverMap.basePath + '/model/group/getList';
 
   constructor(
     private http: Http,
@@ -25,7 +25,7 @@ export class GroupTreeService {
     });
 
     return this.http
-      .get(this.modelListUrl, {
+      .get(this.groupListUrl, {
         search: temp
       })
       .map(res => res.json().data)

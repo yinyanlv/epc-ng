@@ -1,0 +1,42 @@
+<div class="parts" id="parts" [style.display]="isShow ? 'block' : 'none'">
+  <div class="parts-head">
+    <ul>
+      <li class="row-number"><span>序号</span></li>
+      <li class="part-number"><span>配件编码</span></li>
+      <li class="part-name"><span>配件名称</span></li>
+      <li class="qty"><span>用量</span></li>
+      <li class="remark"><span>备注</span></li>
+    </ul>
+  </div>
+  <div class="parts-body" id="parts-body">
+
+    <div *ngFor="let item of usageList; let i = index;" class="list-item" (click)="onClickItem(item.callout)">
+      <div class="item row-number">
+        <div class="item-cont-wrap text-center"><span>{{i + 1}}</span><br></div>
+      </div>
+      <div class="item part-number">
+        <div class="item-cont-wrap">
+          <div class="number"><a [routerLink]="['/detail', item.partNo]" class="text-link">{{item.partNo}}</a></div>
+          <div class="icon-wrap">
+            <a class="icon supersession active"  href="javascript:;" (click)="onClickIcon()"></a>
+            <a class="icon copy active"  href="javascript:;" (click)="onClickIcon()"></a>
+            <a class="icon image active" href="javascript:;" (click)="onClickIcon()"></a>
+            <a class="icon price active" href="javascript:;" (click)="onClickIcon()"></a>
+          </div>
+        </div>
+      </div>
+      <div class="item part-name">
+        <div class="item-cont-wrap">
+          <div class="name" title="{{item.partName}}"><span>{{item.partName}}</span></div>
+          <div class="date"><span>{{item.startDate}}</span></div>
+        </div>
+      </div>
+      <div class="item qty">
+        <div class="item-cont-wrap text-center"><span>{{item.qty}}</span></div>
+      </div>
+      <div class="item remark" title="{{item.usageNote}}">
+        <div class="item-cont-wrap"><span>{{item.usageNote}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>

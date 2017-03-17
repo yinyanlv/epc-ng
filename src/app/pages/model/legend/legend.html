@@ -1,20 +1,6 @@
-<div class="model">
-  <div class="model-head">{{'catalog.treeTitle' | translate}}</div>
-  <div class="model-body" id="model-body">
-    <ul *ngFor="let modelGroup of modelList" class="type-list">
-      <li class="type-item" [class.checked]="modelGroup.active">
-        <div>
-          <span class="type" (click)="modelGroup.active = !modelGroup.active">
-            <span class="icon"></span>
-            <a [routerLink]="['/model']" [queryParams]="{brandCode: modelGroup.brandCode, seriesCode: modelGroup.seriesCode, modelGroupCode: modelGroup.modelGroupCode}" class="link">{{modelGroup.modelGroupName}}</a>
-          </span>
-        </div>
-        <ul *ngFor="let model of modelGroup.models" class="model-list">
-          <li class="model-item"><span class="icon"></span>
-            <a [routerLink]="['/model']" [queryParams]="{brandCode: modelGroup.brandCode, seriesCode: modelGroup.seriesCode, modelGroupCode: modelGroup.modelGroupCode, modelCode: model.modelCode}" class="link">{{model.modelName}}</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+<div class="group-legend-toggle" id="group-toggle-bar" style="display: block;"></div>
+<div class="legend-container" id="legend-container" [style.display]="isShow ? 'block' : 'none'">
+  <div class="legend-head" id="legend-title"></div>
+  <div class="legend-body" id="legend-body"></div>
 </div>
+<div class="legend-parts-toggle" id="parts-toggle-bar" [style.display]="isShow ? 'block' : 'none'"></div>
