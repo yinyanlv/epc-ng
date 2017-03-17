@@ -1,4 +1,4 @@
-<div class="group">
+<div class="group" [class.hide]="isLeftCollapsed">
   <div class="group-head">{{'model.treeTitle' | translate}}</div>
   <div class="group-body">
     <ul *ngIf="groupList.length">

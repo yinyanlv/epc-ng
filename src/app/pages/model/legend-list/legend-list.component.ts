@@ -39,6 +39,7 @@ export class LegendListComponent implements OnInit {
 
     this.isShow = false;
 
+    this.subjectService.trigger('legend-wrapper:show', null);
     this.subjectService.trigger('legend:show', data);
   }
 }

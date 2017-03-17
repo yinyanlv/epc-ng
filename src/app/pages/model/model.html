@@ -5,7 +5,7 @@
 <div class="page-cont">
   <group-tree></group-tree>
   <legend-list></legend-list>
-  <div id="legend-parts-wrap" class="legend-parts-wrap">
+  <div class="legend-parts-wrap" [class.collapse-group]="isLeftCollapsed" [style.display]="isShow ? 'block' : 'none'">
     <app-legend></app-legend>
     <usage-list></usage-list>
   </div>

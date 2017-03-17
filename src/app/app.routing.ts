@@ -18,7 +18,7 @@ const routes: Routes = [{
   path: 'catalog',
   component: CatalogComponent,
   // loadChildren: './pages/catalog/catalog.module#CatalogModule',
-  // canActivate: [CanActivateGuardService]
+  canActivate: [CanActivateGuardService]
 }, {
   path: 'model',
   component: ModelComponent

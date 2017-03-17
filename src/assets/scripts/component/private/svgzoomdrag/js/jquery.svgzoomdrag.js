@@ -559,7 +559,7 @@
 			minZoom: 0.08,
 			dock: "TL",
 			assistiveTool: 1,
-			nopic: "nopic.gif",
+			nopic: "../res/nopic.gif",
 			callbacks: {
 				onLoaded: null,
 				onRotate: null,

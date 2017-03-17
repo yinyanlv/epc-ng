@@ -1,4 +1,4 @@
-<div class="parts" id="parts" [style.display]="isShow ? 'block' : 'none'">
+<div class="parts" [class.hide]="isRightCollapsed" [style.display]="isShow ? 'block' : 'none'">
   <div class="parts-head">
     <ul>
       <li class="row-number"><span>序号</span></li>
@@ -10,18 +10,18 @@
   </div>
   <div class="parts-body" id="parts-body">
 
-    <div *ngFor="let item of usageList; let i = index;" class="list-item" (click)="onClickItem(item.callout)">
+    <div *ngFor="let item of usageList; let i = index;" class="list-item" [class.checked]="checkedCallout === item.callout ? true : false" (click)="onClickItem(item.callout)">
       <div class="item row-number">
-        <div class="item-cont-wrap text-center"><span>{{i + 1}}</span><br></div>
+        <div class="item-cont-wrap text-center"><span>{{item.callout}}</span><br></div>
       </div>
       <div class="item part-number">
         <div class="item-cont-wrap">
           <div class="number"><a [routerLink]="['/detail', item.partNo]" class="text-link">{{item.partNo}}</a></div>
           <div class="icon-wrap">
-            <a class="icon supersession active"  href="javascript:;" (click)="onClickIcon()"></a>
-            <a class="icon copy active"  href="javascript:;" (click)="onClickIcon()"></a>
-            <a class="icon image active" href="javascript:;" (click)="onClickIcon()"></a>
-            <a class="icon price active" href="javascript:;" (click)="onClickIcon()"></a>
+            <a class="icon supersession active"  href="javascript:;" (click)="onClickIcon($event)"></a>
+            <a class="icon copy active"  href="javascript:;" (click)="onClickIcon($event)"></a>
+            <a class="icon image active" href="javascript:;" (click)="onClickIcon($event)"></a>
+            <a class="icon price active" href="javascript:;" (click)="onClickIcon($event)"></a>
           </div>
         </div>
       </div>

@@ -1,16 +1,26 @@
 import {Injectable} from '@angular/core';
-import {CanActivate} from '@angular/router';
+import {CanActivate, Router} from '@angular/router';
 import {GlobalStateService} from './global-state.service';
 
 @Injectable()
 export class CanActivateGuardService implements CanActivate{
 
   constructor(
-    private globalState: GlobalStateService
+    private globalState: GlobalStateService,
+    private router: Router
   ) {
   }
 
   canActivate(): boolean {
-    return this.globalState.hasLogined();
+
+    if (!this.globalState.hasLogined()) {
+
+
+      this.router.navigate(['/login']);
+
+      return false;
+    }
+
+    return true;
   }
 }

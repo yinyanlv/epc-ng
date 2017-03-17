@@ -4,7 +4,7 @@ import {LegendService} from './legend.service';
 import {SubjectService} from '../../../common/services/subject.service';
 
 let globalRequire = window['require'];
-let $ = window['jQuery'];
+let $;
 
 @Component({
   selector: 'app-legend',
@@ -15,7 +15,9 @@ let $ = window['jQuery'];
 })
 export class LegendComponent implements OnInit, AfterViewInit{
 
-  private isShow: boolean = false;
+  private isLeftCollapsed: boolean = false;
+  private isRightCollapsed: boolean = false;
+  private legendTitle: string = '';
   private $legendBody;
   private legendLoaded: boolean = false;
 
@@ -29,28 +31,40 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
     this.subjectService.subscribe('legend:show', (data) => {
 
-      this.isShow = true;
       this.setLegend(data);
     });
 
     this.subjectService.subscribe('legend:hide', () => {
-      this.isShow = false;
+
+    });
+
+    this.subjectService.subscribe('legend:select', (callout) => {
+
+      this.$legendBody.svgHotpoint("highlightCallout", [callout]);
     });
   }
 
   ngAfterViewInit() {
+    let self = this;
 
-    this.$legendBody = $ && $('#legend-body');
-    this.initSvgHotpoint();
+    globalRequire(['jquerySvgHotpoint', 'scrollIntoView', 'snap'], function () {
+      $ = window['jQuery'];
+
+      self.$legendBody = $('#legend-body');
+      self.initSvgHotpoint();
+    });
   }
 
   setLegend(data: Object): void {
 
+    this.legendTitle = data['name'];
     this.loadSvgLegend(data['images'][0].svgFile);
     this.subjectService.trigger('usage-list:show', data);
   }
 
-  initSvgHotpoint() {
+  initSvgHotpoint(): void {
+
+    let self = this;
 
     this.$legendBody.svgHotpoint({
       host: '',
@@ -58,13 +72,14 @@ export class LegendComponent implements OnInit, AfterViewInit{
       rowBgColor: '#A7CDF1',
       callbacks: {
         onSelectionCallout: function(callout) {
-          alert('callout');
+
+          self.subjectService.trigger('usage-list:select', callout);
         }
       }
     });
   }
 
-  loadSvgLegend(svgUrl) {
+  loadSvgLegend(svgUrl): void {
 
     let self = this;
 
@@ -74,5 +89,17 @@ export class LegendComponent implements OnInit, AfterViewInit{
         self.legendLoaded = true;
       }
     });
+  }
+
+  onClickLeftToggle(): void {
+
+    this.isLeftCollapsed = !this.isLeftCollapsed;
+    this.subjectService.trigger('legend:left-collapsed', this.isLeftCollapsed);
+  }
+
+  onClickRightToggle(): void {
+
+    this.isRightCollapsed = !this.isRightCollapsed;
+    this.subjectService.trigger('legend:right-collapsed', this.isRightCollapsed);
   }
 }

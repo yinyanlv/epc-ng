@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 
 import {GroupTreeService} from './group-tree.service';
 import {SubjectService} from '../../../common/services/subject.service';
@@ -7,6 +7,7 @@ import {SubjectService} from '../../../common/services/subject.service';
   selector: 'group-tree',
   templateUrl: './group-tree.html',
   styleUrls: ['./group-tree.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     GroupTreeService
   ]
@@ -15,6 +16,7 @@ export class GroupTreeComponent implements OnInit {
 
   private groupList: Array<any> = [];
   private checkedNodeCode: string = '';
+  private isLeftCollapsed: boolean = false;
 
   constructor(
     private groupTreeService: GroupTreeService,
@@ -29,6 +31,10 @@ export class GroupTreeComponent implements OnInit {
       .subscribe((res) => {
         this.setGroupTree(res);
       });
+
+    this.subjectService.subscribe('legend:left-collapsed', (data) => {
+      this.isLeftCollapsed = data;
+    });
   }
 
   setGroupTree(data: Array<Object>): void {
@@ -44,6 +50,7 @@ export class GroupTreeComponent implements OnInit {
 
       this.subjectService.trigger('legend:hide', null);
       this.subjectService.trigger('usage-list:hide', null);
+      this.subjectService.trigger('legend-wrapper:hide', null);
       this.subjectService.trigger('legend-list:show', data['subGroup']);
     }
 
@@ -51,12 +58,14 @@ export class GroupTreeComponent implements OnInit {
 
       this.subjectService.trigger('legend:hide', null);
       this.subjectService.trigger('usage-list:hide', null);
+      this.subjectService.trigger('legend-wrapper:hide', null);
       this.subjectService.trigger('legend-list:show', [data]);
     }
 
     if (type === 'image') {
 
       this.subjectService.trigger('legend-list:hide', null);
+      this.subjectService.trigger('legend-wrapper:show', null);
       this.subjectService.trigger('legend:show', data);
     }
   }

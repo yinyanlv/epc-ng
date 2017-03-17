@@ -16,6 +16,8 @@ export class UsageListComponent implements OnInit {
 
   private usageList: Array<any> = [];
   private isShow: boolean = false;
+  private checkedCallout: string = '';
+  private isRightCollapsed: boolean = false;
 
   constructor(
     private usageListService: UsageListService,
@@ -34,6 +36,15 @@ export class UsageListComponent implements OnInit {
     this.subjectService.subscribe('usage-list:hide', () => {
       this.isShow = false;
     });
+
+    this.subjectService.subscribe('usage-list:select', (callout) => {
+
+      this.checkedCallout = callout;
+    });
+
+    this.subjectService.subscribe('legend:right-collapsed', (data) => {
+      this.isRightCollapsed = data;
+    });
   }
 
   setUsageList(data: Array<Object>): void {
@@ -49,10 +60,14 @@ export class UsageListComponent implements OnInit {
 
   onClickItem(callout: string): void {
 
-    console.log(callout);
+    this.checkedCallout = callout;
+    this.subjectService.trigger('legend:select', callout);
   }
 
-  onClickIcon(): void {
+  onClickIcon(e): void {
+
+    e.stopPropagation();
+
     this.subjectService.trigger('growl:show', {
       type: 'info',
       title: '提示',

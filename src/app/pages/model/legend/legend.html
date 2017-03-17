@@ -1,6 +1,6 @@
-<div class="group-legend-toggle" id="group-toggle-bar" style="display: block;"></div>
-<div class="legend-container" id="legend-container" [style.display]="isShow ? 'block' : 'none'">
-  <div class="legend-head" id="legend-title"></div>
+<div class="group-legend-toggle" [class.collapse]="isLeftCollapsed" (click)="onClickLeftToggle()"></div>
+<div class="legend-container" [class.collapse-group]="isLeftCollapsed" [class.collapse-parts]="isRightCollapsed" id="legend-container">
+  <div class="legend-head" id="legend-title">{{legendTitle}}</div>
   <div class="legend-body" id="legend-body"></div>
 </div>
-<div class="legend-parts-toggle" id="parts-toggle-bar" [style.display]="isShow ? 'block' : 'none'"></div>
+<div class="legend-parts-toggle" [class.collapse]="isRightCollapsed" (click)="onClickRightToggle()"></div>
