@@ -21,7 +21,8 @@ const routes: Routes = [{
   canActivate: [CanActivateGuardService]
 }, {
   path: 'model',
-  component: ModelComponent
+  component: ModelComponent,
+  canActivate: [CanActivateGuardService]
 }, {
   path: '**',
   component: NotFoundComponent
