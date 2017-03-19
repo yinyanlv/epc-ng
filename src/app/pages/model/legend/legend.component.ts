@@ -1,4 +1,5 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
 import {LegendService} from './legend.service';
 import {SubjectService} from '../../../common/services/subject.service';
@@ -23,7 +24,9 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
   constructor(
     private legendService: LegendService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -74,6 +77,7 @@ export class LegendComponent implements OnInit, AfterViewInit{
         onSelectionCallout: function(callout) {
 
           self.subjectService.trigger('usage-list:select', callout);
+          self.setUrl(callout);
         }
       }
     });
@@ -101,5 +105,19 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
     this.isRightCollapsed = !this.isRightCollapsed;
     this.subjectService.trigger('legend:right-collapsed', this.isRightCollapsed);
+  }
+
+  setUrl(callout: String): void {
+
+    let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
+    let queryParams = {};
+
+    Object.assign(queryParams, routeSnapshot.queryParams);
+
+    queryParams['callout'] = callout;
+
+    this.router.navigate(['/model'], {
+      queryParams
+    });
   }
 }

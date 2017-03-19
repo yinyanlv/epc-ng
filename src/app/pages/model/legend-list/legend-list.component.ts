@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
 import {SubjectService} from '../../../common/services/subject.service';
 
@@ -13,7 +14,9 @@ export class LegendListComponent implements OnInit {
   private isShow: boolean = true;
 
   constructor(
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -41,5 +44,21 @@ export class LegendListComponent implements OnInit {
 
     this.subjectService.trigger('legend-wrapper:show', null);
     this.subjectService.trigger('legend:show', data);
+
+    this.setUrl(data['images'][0]['code']);
+  }
+
+  setUrl(groupCode: String): void {
+
+    let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
+    let queryParams = {};
+
+    Object.assign(queryParams, routeSnapshot.queryParams);
+
+    queryParams['groupCode'] = groupCode;
+
+    this.router.navigate(['/model'], {
+      queryParams
+    });
   }
 }

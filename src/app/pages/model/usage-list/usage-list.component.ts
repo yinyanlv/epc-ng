@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
 import {UsageListService} from './usage-list.service';
 import {SubjectService} from '../../../common/services/subject.service';
@@ -21,7 +22,9 @@ export class UsageListComponent implements OnInit {
 
   constructor(
     private usageListService: UsageListService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -62,6 +65,7 @@ export class UsageListComponent implements OnInit {
 
     this.checkedCallout = callout;
     this.subjectService.trigger('legend:select', callout);
+    this.setUrl(callout);
   }
 
   onClickIcon(e): void {
@@ -72,6 +76,20 @@ export class UsageListComponent implements OnInit {
       type: 'info',
       title: '提示',
       content: '该功能尚未实现'
+    });
+  }
+
+  setUrl(callout: String): void {
+
+    let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
+    let queryParams = {};
+
+    Object.assign(queryParams, routeSnapshot.queryParams);
+
+    queryParams['callout'] = callout;
+
+    this.router.navigate(['/model'], {
+      queryParams
     });
   }
 }
