@@ -3,7 +3,6 @@ import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
 import {GroupTreeService} from './group-tree.service';
 import {SubjectService} from '../../../common/services/subject.service';
-import set = Reflect.set;
 
 @Component({
   selector: 'group-tree',
@@ -17,6 +16,7 @@ import set = Reflect.set;
 export class GroupTreeComponent implements OnInit {
 
   private groupList: Array<any> = [];
+  private expandNodeList: Array<any> = [];
   private checkedNodeCode: string = '';
   private isLeftCollapsed: boolean = false;
 
@@ -37,11 +37,17 @@ export class GroupTreeComponent implements OnInit {
       });
 
     this.activatedRoute.queryParams.subscribe((params) => {
-
+      if (params['nodeCode']) {
+        this.setExpandNodeList(params['nodeCode']);
+      }
     });
 
     this.subjectService.subscribe('legend:left-collapsed', (data) => {
       this.isLeftCollapsed = data;
+    });
+
+    this.subjectService.subscribe('group-tree:activate', (data) => {
+      this.activateNode(data['images'][0]['code']);
     });
   }
 
@@ -52,13 +58,57 @@ export class GroupTreeComponent implements OnInit {
     this.groupList = data;
   }
 
+  activateNode(nodeCode: string): void {
+
+    this.checkedNodeCode = nodeCode;
+    this.setExpandNodeList(nodeCode);
+  }
+
+  setExpandNodeList(nodeCode: string) {
+
+    let temp = [];
+
+    for (let i = 0; i < this.groupList.length; i++) {
+
+      let group = this.groupList[i];
+
+      if (group['code'] === nodeCode) {
+
+        break;
+      }
+
+      for (let j = 0; j < group['subGroup'].length; j++) {
+        let subGroup = group['subGroup'][j];
+
+        if (subGroup['code'] === nodeCode) {
+
+          temp.push(group['code']);
+          break;
+        }
+
+        for (let k = 0; k < subGroup['images'].length; k++) {
+          let image = subGroup['images'][k];
+
+          if (image['code'] === nodeCode) {
+
+            temp.push(group['code']);
+            temp.push(subGroup['code']);
+            break;
+          }
+        }
+      }
+    }
+
+    this.expandNodeList = temp;
+  }
+
   onClickNode(type: string, data: Object) {
 
-    let groupCode;
+    let nodeCode;
 
     if (type === 'group') {
 
-      groupCode = data['code'];
+      nodeCode = data['code'];
 
       this.subjectService.trigger('legend:hide', null);
       this.subjectService.trigger('usage-list:hide', null);
@@ -68,7 +118,7 @@ export class GroupTreeComponent implements OnInit {
 
     if (type === 'sub-group') {
 
-      groupCode = data['code'];
+      nodeCode = data['code'];
 
       this.subjectService.trigger('legend:hide', null);
       this.subjectService.trigger('usage-list:hide', null);
@@ -78,24 +128,25 @@ export class GroupTreeComponent implements OnInit {
 
     if (type === 'image') {
 
-      groupCode = data['images'][0]['code'];
+      nodeCode = data['images'][0]['code'];
 
       this.subjectService.trigger('legend-list:hide', null);
       this.subjectService.trigger('legend-wrapper:show', null);
       this.subjectService.trigger('legend:show', data);
     }
 
-    this.setUrl(groupCode);
+    this.setUrl(nodeCode);
   }
 
-  setUrl(groupCode: String): void {
+  setUrl(nodeCode: String): void {
 
     let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
     let queryParams = {};
 
     Object.assign(queryParams, routeSnapshot.queryParams);
 
-    queryParams['groupCode'] = groupCode;
+    queryParams['nodeCode'] = nodeCode;
+    delete queryParams['callout'];
 
     this.router.navigate(['/model'], {
       queryParams

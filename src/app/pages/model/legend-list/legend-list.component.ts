@@ -44,18 +44,20 @@ export class LegendListComponent implements OnInit {
 
     this.subjectService.trigger('legend-wrapper:show', null);
     this.subjectService.trigger('legend:show', data);
+    this.subjectService.trigger('group-tree:activate', data);
 
     this.setUrl(data['images'][0]['code']);
   }
 
-  setUrl(groupCode: String): void {
+  setUrl(nodeCode: String): void {
 
     let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
     let queryParams = {};
 
     Object.assign(queryParams, routeSnapshot.queryParams);
 
-    queryParams['groupCode'] = groupCode;
+    queryParams['nodeCode'] = nodeCode;
+    delete queryParams['callout'];
 
     this.router.navigate(['/model'], {
       queryParams
