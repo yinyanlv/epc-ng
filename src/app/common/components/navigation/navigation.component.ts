@@ -27,7 +27,7 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
 
     this.navigation
-      .loadUserInfo(this.globalState.username)
+      .loadUserInfo(this.globalState.getUserName())
       .subscribe((res) => {
 
         this.globalState.setUserInfo(res);

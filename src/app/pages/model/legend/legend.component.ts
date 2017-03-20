@@ -32,6 +32,12 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
   ngOnInit() {
 
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['callout']) {
+        this.$legendBody.svgHotpoint("highlightCallout", [params['callout']]);
+      }
+    });
+
     this.subjectService.subscribe('legend:show', (data) => {
 
       this.setLegend(data);

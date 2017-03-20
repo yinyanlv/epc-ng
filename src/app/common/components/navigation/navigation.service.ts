@@ -25,7 +25,7 @@ export class NavigationService {
     }
 
     return this.http
-      .get(this.userInfoUrl + '?username=' + this.globalState.username)
+      .get(this.userInfoUrl + '?username=' + this.globalState.getUserName())
       .map((res) => JSON.parse(res.json().data))
       .catch(this.handleError.handler);
   }

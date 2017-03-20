@@ -3,44 +3,41 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class GlobalStateService {
 
-  isLogined: boolean = false;
+  setAsLogined(username: string): void {
 
-  username: string;
+    localStorage.setItem('isLogined', 'true');
+    localStorage.setItem('username', username);
+  }
 
-  userInfo: Object = null;
+  getUserName(): string {
 
-  language: string = 'zh';
+    return localStorage.getItem('username');
+  }
 
   hasLogined(): boolean {
 
-    return this.isLogined;
-  }
-
-  setAsLogined(username: string): void {
-
-    this.isLogined = true;
-    this.username = username;
+    return localStorage.getItem('isLogined') === 'true';
   }
 
   setUserInfo(userInfo: Object): void {
 
-    this.userInfo = userInfo;
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
   }
 
   setAsLogouted(): void {
 
-    this.isLogined = false;
-    this.username = null;
-    this.userInfo = null;
+    localStorage.setItem('isLogined', 'false');
+    localStorage.setItem('username', '');
+    localStorage.setItem('userInfo', '');
   }
 
   setLanguage(lang: string): void {
 
-    this.language = lang;
+    localStorage.setItem('language', lang);
   }
 
   getLanguage(): string {
 
-    return this.language;
+    return localStorage.getItem('language') !== 'undefined' ? localStorage.getItem('language') : 'zh';
   }
 }

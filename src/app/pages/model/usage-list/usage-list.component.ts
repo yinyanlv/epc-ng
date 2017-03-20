@@ -30,6 +30,12 @@ export class UsageListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['callout']) {
+        this.checkedCallout = params['callout'];
+      }
+    });
+
     this.subjectService.subscribe('usage-list:show', (data) => {
 
       this.isShow = true;
