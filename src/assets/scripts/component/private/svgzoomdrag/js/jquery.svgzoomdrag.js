@@ -285,7 +285,7 @@
 			getNopicPath: function() {
 				var me = this,
 					nopic = me.opts.nopic,
-					path = me.opts.host + "/scripts/" + basePath + "res/" + nopic;
+					path = me.opts.host + "/assets/scripts/" + basePath + "res/" + nopic;
 
 				return path;
 			},
@@ -559,7 +559,7 @@
 			minZoom: 0.08,
 			dock: "TL",
 			assistiveTool: 1,
-			nopic: "../res/nopic.gif",
+			nopic: "nopic.gif",
 			callbacks: {
 				onLoaded: null,
 				onRotate: null,
