@@ -4,20 +4,20 @@
     <ul *ngIf="groupList.length">
       <li *ngFor="let group of groupList; let i = index;">
 
-        <a href="javascript:;"  title="{{group.name}}" [class.checked]="group.code === checkedNodeCode" [class.expand]="group.expand || expandNodeList.includes(group.code)">
-          <span data-field="icon" class="icon" (click)="group.expand = !group.expand; expandNodeList = []"></span>
+        <a href="javascript:;"  title="{{group.name}}" [class.checked]="group.code === checkedNodeCode" [class.expand]="group.expand">
+          <span data-field="icon" class="icon" (click)="group.expand = !group.expand;"></span>
           <span data-field="text" class="text" (click)="checkedNodeCode = group.code; onClickNode('group', group)">{{ group.code + '.' + group.name}}</span>
         </a>
 
-        <ul *ngIf="group.subGroup?.length" [style.display]="group.expand || expandNodeList.includes(group.code) ? 'block' : 'none'">
+        <ul *ngIf="group.subGroup?.length" [style.display]="group.expand ? 'block' : 'none'">
           <li *ngFor="let subGroup of group.subGroup">
 
-            <a href="javascript:;" title="{{subGroup.name}}" [class.checked]="subGroup.code === checkedNodeCode" [class.expand]="subGroup.expand || expandNodeList.includes(subGroup.code)">
-              <span data-field="icon" class="icon" (click)="subGroup.expand = !subGroup.expand; expandNodeList = []"></span>
+            <a href="javascript:;" title="{{subGroup.name}}" [class.checked]="subGroup.code === checkedNodeCode" [class.expand]="subGroup.expand">
+              <span data-field="icon" class="icon" (click)="subGroup.expand = !subGroup.expand;"></span>
               <span data-field="text" class="text" (click)="checkedNodeCode = subGroup.code; onClickNode('sub-group', subGroup)">{{ subGroup.code + '.' + subGroup.name}}</span>
             </a>
 
-            <ul *ngIf="subGroup.images?.length" [style.display]="subGroup.expand || expandNodeList.includes(subGroup.code) ? 'block' : 'none'">
+            <ul *ngIf="subGroup.images?.length" [style.display]="subGroup.expand ? 'block' : 'none'">
               <li  *ngFor="let image of subGroup.images">
                 <a href="javascript:;" [class.checked]="image.code === checkedNodeCode" class="leaf" title="{{image.name}}">
                   <span class="icon"></span>

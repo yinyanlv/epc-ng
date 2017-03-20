@@ -57,7 +57,6 @@ export class LegendListComponent implements OnInit {
     Object.assign(queryParams, routeSnapshot.queryParams);
 
     queryParams['nodeCode'] = nodeCode;
-    delete queryParams['callout'];
 
     this.router.navigate(['/model'], {
       queryParams

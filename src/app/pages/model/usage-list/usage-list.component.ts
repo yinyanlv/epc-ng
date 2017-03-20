@@ -16,7 +16,6 @@ import {SubjectService} from '../../../common/services/subject.service';
 export class UsageListComponent implements OnInit {
 
   private usageList: Array<any> = [];
-  private isShow: boolean = false;
   private checkedCallout: string = '';
   private isRightCollapsed: boolean = false;
 
@@ -31,23 +30,14 @@ export class UsageListComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe((params) => {
-      if (params['callout']) {
-        this.checkedCallout = params['callout'];
-      }
+      this.checkedCallout = params['callout'] || '';
     });
 
     this.subjectService.subscribe('usage-list:show', (data) => {
-
-      this.isShow = true;
       this.setUsageList(data);
     });
 
-    this.subjectService.subscribe('usage-list:hide', () => {
-      this.isShow = false;
-    });
-
     this.subjectService.subscribe('usage-list:select', (callout) => {
-
       this.checkedCallout = callout;
     });
 

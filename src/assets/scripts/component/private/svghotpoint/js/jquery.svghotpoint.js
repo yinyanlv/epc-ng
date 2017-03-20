@@ -322,7 +322,7 @@
 
 			getCalloutTexts: function(callouts) {
 				var me = this,
-					texts = me.texts.filter(function() {
+					texts = me.texts && me.texts.filter(function() {
 						var callout = $(this).text();
 
 						return $.inArray(callout, callouts) > -1;

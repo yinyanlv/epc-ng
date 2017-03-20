@@ -28,6 +28,11 @@ export class CrumbsComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
 
+      params = JSON.parse(JSON.stringify(params));
+
+      if (params['nodeCode']) delete params['nodeCode'];
+      if (params['callout']) delete params['callout'];
+
       this.crumbsService
         .load(params)
         .subscribe((res) => {

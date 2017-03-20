@@ -15,9 +15,11 @@ import {SubjectService} from '../../../common/services/subject.service';
 })
 export class GroupTreeComponent implements OnInit {
 
+  private isGroupListLoaded: boolean = false;
   private groupList: Array<any> = [];
   private expandNodeList: Array<any> = [];
   private checkedNodeCode: string = '';
+  private checkedNodeData: any;
   private isLeftCollapsed: boolean = false;
 
   constructor(
@@ -33,13 +35,15 @@ export class GroupTreeComponent implements OnInit {
     this.groupTreeService
       .loadList({})
       .subscribe((res) => {
-        this.setGroupTree(res);
-      });
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (params['nodeCode']) {
-        this.setExpandNodeList(params['nodeCode']);
-      }
+        let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
+        let queryParams = {};
+
+        Object.assign(queryParams, routeSnapshot.queryParams);
+
+        this.setGroupTree(res);
+
+        this.activateNode(queryParams['nodeCode'] || this.groupList[0]['code']);
     });
 
     this.subjectService.subscribe('legend:left-collapsed', (data) => {
@@ -53,15 +57,17 @@ export class GroupTreeComponent implements OnInit {
 
   setGroupTree(data: Array<Object>): void {
 
-    this.checkedNodeCode = data[0]['code'];
-    this.onClickNode('group', data[0]);
+    this.isGroupListLoaded = true;
     this.groupList = data;
   }
 
   activateNode(nodeCode: string): void {
 
-    this.checkedNodeCode = nodeCode;
-    this.setExpandNodeList(nodeCode);
+    if (this.isGroupListLoaded) {
+
+      this.checkedNodeCode = nodeCode;
+      this.setExpandNodeList(nodeCode);
+    }
   }
 
   setExpandNodeList(nodeCode: string) {
@@ -74,6 +80,7 @@ export class GroupTreeComponent implements OnInit {
 
       if (group['code'] === nodeCode) {
 
+        this.checkedNodeData = group;
         break;
       }
 
@@ -82,6 +89,9 @@ export class GroupTreeComponent implements OnInit {
 
         if (subGroup['code'] === nodeCode) {
 
+          this.checkedNodeData = subGroup;
+
+          group['expand'] = true;
           temp.push(group['code']);
           break;
         }
@@ -91,6 +101,10 @@ export class GroupTreeComponent implements OnInit {
 
           if (image['code'] === nodeCode) {
 
+            this.checkedNodeData = subGroup;
+
+            group['expand'] = true;
+            subGroup['expand'] = true;
             temp.push(group['code']);
             temp.push(subGroup['code']);
             break;
@@ -100,6 +114,25 @@ export class GroupTreeComponent implements OnInit {
     }
 
     this.expandNodeList = temp;
+    this.loadLegend();
+  }
+
+  loadLegend() {
+
+    if (this.checkedNodeData) {
+
+      if (this.expandNodeList.length === 0) {
+        this.onClickNode('group', this.checkedNodeData);
+      }
+
+      if (this.expandNodeList.length === 1) {
+        this.onClickNode('sub-group', this.checkedNodeData);
+      }
+
+      if (this.expandNodeList.length === 2) {
+        this.onClickNode('image', this.checkedNodeData);
+      }
+    }
   }
 
   onClickNode(type: string, data: Object) {
@@ -110,8 +143,6 @@ export class GroupTreeComponent implements OnInit {
 
       nodeCode = data['code'];
 
-      this.subjectService.trigger('legend:hide', null);
-      this.subjectService.trigger('usage-list:hide', null);
       this.subjectService.trigger('legend-wrapper:hide', null);
       this.subjectService.trigger('legend-list:show', data['subGroup']);
     }
@@ -120,8 +151,6 @@ export class GroupTreeComponent implements OnInit {
 
       nodeCode = data['code'];
 
-      this.subjectService.trigger('legend:hide', null);
-      this.subjectService.trigger('usage-list:hide', null);
       this.subjectService.trigger('legend-wrapper:hide', null);
       this.subjectService.trigger('legend-list:show', [data]);
     }
@@ -135,10 +164,10 @@ export class GroupTreeComponent implements OnInit {
       this.subjectService.trigger('legend:show', data);
     }
 
-    this.setUrl(nodeCode);
+    this.setUrl(type, nodeCode);
   }
 
-  setUrl(nodeCode: String): void {
+  setUrl(type: string, nodeCode: String): void {
 
     let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
     let queryParams = {};
@@ -146,7 +175,10 @@ export class GroupTreeComponent implements OnInit {
     Object.assign(queryParams, routeSnapshot.queryParams);
 
     queryParams['nodeCode'] = nodeCode;
-    delete queryParams['callout'];
+
+    if (queryParams['callout']) {
+      delete queryParams['callout'];
+    }
 
     this.router.navigate(['/model'], {
       queryParams

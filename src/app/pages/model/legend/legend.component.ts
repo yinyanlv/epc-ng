@@ -1,7 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
-import {LegendService} from './legend.service';
 import {SubjectService} from '../../../common/services/subject.service';
 
 let globalRequire = window['require'];
@@ -9,10 +8,7 @@ let $;
 
 @Component({
   selector: 'app-legend',
-  templateUrl: './legend.html',
-  providers: [
-    LegendService
-  ]
+  templateUrl: './legend.html'
 })
 export class LegendComponent implements OnInit, AfterViewInit{
 
@@ -21,9 +17,11 @@ export class LegendComponent implements OnInit, AfterViewInit{
   private legendTitle: string = '';
   private $legendBody;
   private legendLoaded: boolean = false;
+  private legendTaskList: Array<any> = [];
+  private calloutTaskList: Array<any> = [];
+  private isSvgHotpointInited: boolean = false;
 
   constructor(
-    private legendService: LegendService,
     private subjectService: SubjectService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -33,23 +31,39 @@ export class LegendComponent implements OnInit, AfterViewInit{
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe((params) => {
+
       if (params['callout']) {
-        this.$legendBody.svgHotpoint("highlightCallout", [params['callout']]);
+
+        if (!this.isSvgHotpointInited) {
+
+          this.calloutTaskList.push({
+            name: 'select-callout',
+            data: [params['callout']]
+          });
+        } else {
+
+          this.$legendBody.svgHotpoint('highlightCallout', [params['callout']]);
+        }
       }
     });
 
     this.subjectService.subscribe('legend:show', (data) => {
 
-      this.setLegend(data);
-    });
+      if (!this.isSvgHotpointInited) {
 
-    this.subjectService.subscribe('legend:hide', () => {
+        this.legendTaskList.push({
+          name: 'show-legend',
+          data
+        });
+      } else {
 
+        this.setLegend(data);
+      }
     });
 
     this.subjectService.subscribe('legend:select', (callout) => {
 
-      this.$legendBody.svgHotpoint("highlightCallout", [callout]);
+      this.$legendBody.svgHotpoint('highlightCallout', [callout]);
     });
   }
 
@@ -87,16 +101,45 @@ export class LegendComponent implements OnInit, AfterViewInit{
         }
       }
     });
+
+    this.isSvgHotpointInited = true;
+
+    this.runLegendTasks();
+
+  }
+
+  runLegendTasks() {
+
+    while (this.legendTaskList.length > 0) {
+
+      let task = this.legendTaskList.shift();
+
+      if (task.name === 'show-legend') this.setLegend(task.data);
+    }
+  }
+
+  runCalloutTasks() {
+
+    while (this.calloutTaskList.length > 0) {
+
+      let task = this.calloutTaskList.shift();
+
+      if (task.name === 'select-callout') this.$legendBody.svgHotpoint('highlightCallout', task.data);
+    }
   }
 
   loadSvgLegend(svgUrl): void {
 
     let self = this;
 
+    self.legendLoaded = false;
+
     this.$legendBody.svgHotpoint('loadSVG', {
       url: svgUrl,
       loaded: function() {
+
         self.legendLoaded = true;
+        // self.runCalloutTasks();
       }
     });
   }

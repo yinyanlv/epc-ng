@@ -36,7 +36,7 @@ export class SeriesListComponent implements OnInit {
 
         if (this.seriesList) {  // 不带任何参数跳转时，默认显示第一个品牌的第一个车系
 
-            this.setQueryString(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
+            this.setUrl(this.seriesList[0]['brandCode'], this.seriesList[0]['series'][0]['seriesCode']);
         }
 
         return;
@@ -50,7 +50,7 @@ export class SeriesListComponent implements OnInit {
           }
         });
 
-        this.setQueryString(params['brandCode'], matchedItem['series'][0]['seriesCode']);
+        this.setUrl(params['brandCode'], matchedItem['series'][0]['seriesCode']);
 
         return;
       }
@@ -64,20 +64,20 @@ export class SeriesListComponent implements OnInit {
 
     this.seriesList = data;
 
-    this.setQueryString(this.activeBrandCode || this.seriesList[0]['brandCode'], this.activeSeriesCode || this.seriesList[0]['series'][0]['seriesCode']);
+    this.setUrl(this.activeBrandCode || this.seriesList[0]['brandCode'], this.activeSeriesCode || this.seriesList[0]['series'][0]['seriesCode']);
   }
 
   onCLickBrand(data): void {
 
-    this.setQueryString(data.brandCode, data.series[0]['seriesCode']);
+    this.setUrl(data.brandCode, data.series[0]['seriesCode']);
   }
 
   onClickSeries(data): void {
 
-    this.setQueryString(this.activeBrandCode, data.seriesCode);
+    this.setUrl(this.activeBrandCode, data.seriesCode);
   }
 
-  setQueryString(brandCode: string, seriesCode: string): void {
+  setUrl(brandCode: string, seriesCode: string): void {
 
     this.router.navigate(['/catalog'], {
       queryParams: {
