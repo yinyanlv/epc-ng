@@ -1,8 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewEncapsulation} from '@angular/core';
 import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
 import {UsageListService} from './usage-list.service';
 import {SubjectService} from '../../../common/services/subject.service';
+
+let globalRequire = window['require'];
+let $;
 
 @Component({
   selector: 'usage-list',
@@ -13,11 +16,12 @@ import {SubjectService} from '../../../common/services/subject.service';
     UsageListService
   ]
 })
-export class UsageListComponent implements OnInit {
+export class UsageListComponent implements OnInit, AfterViewInit {
 
   private usageList: Array<any> = [];
   private checkedCallout: string = '';
   private isRightCollapsed: boolean = false;
+  private calloutTaskId: string = '';
 
   constructor(
     private usageListService: UsageListService,
@@ -30,19 +34,52 @@ export class UsageListComponent implements OnInit {
   ngOnInit() {
 
     this.activatedRoute.queryParams.subscribe((params) => {
+
       this.checkedCallout = params['callout'] || '';
+      if (this.checkedCallout) {
+
+        if ($) {
+
+          setTimeout(() => {
+            let $temp = $(`#parts-body [data-id=${params['callout']}]`);
+
+            if ($temp.length) {
+              $temp.scrollIntoView();
+            }
+          }, 100);
+        } else {
+          this.calloutTaskId = params['callout'];
+        }
+      }
     });
 
     this.subjectService.subscribe('usage-list:show', (data) => {
       this.setUsageList(data);
     });
 
-    this.subjectService.subscribe('usage-list:select', (callout) => {
-      this.checkedCallout = callout;
-    });
-
     this.subjectService.subscribe('legend:right-collapsed', (data) => {
       this.isRightCollapsed = data;
+    });
+  }
+
+  ngAfterViewInit() {
+
+    let self = this;
+
+    globalRequire(['jquerySvgHotpoint', 'scrollIntoView', 'snap'], function () {
+
+      $ = window['jQuery'];
+
+      if (self.calloutTaskId) {
+        setTimeout(() => {
+
+          let $temp = $(`#parts-body [data-id=${self.calloutTaskId}]`);
+
+          if ($temp.length) {
+            $temp.scrollIntoView();
+          }
+        }, 100);
+      }
     });
   }
 
@@ -60,7 +97,6 @@ export class UsageListComponent implements OnInit {
   onClickItem(callout: string): void {
 
     this.checkedCallout = callout;
-    this.subjectService.trigger('legend:select', callout);
     this.setUrl(callout);
   }
 

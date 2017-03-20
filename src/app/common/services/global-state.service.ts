@@ -38,6 +38,6 @@ export class GlobalStateService {
 
   getLanguage(): string {
 
-    return localStorage.getItem('language') !== 'undefined' ? localStorage.getItem('language') : 'zh';
+    return localStorage.getItem('language') || 'zh';
   }
 }

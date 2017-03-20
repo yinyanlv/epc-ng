@@ -43,7 +43,7 @@ export class GroupTreeComponent implements OnInit {
 
         this.setGroupTree(res);
 
-        this.activateNode(queryParams['nodeCode'] || this.groupList[0]['code']);
+        this.activateNode(queryParams['nodeCode'] || this.groupList[0]['code'], true);
     });
 
     this.subjectService.subscribe('legend:left-collapsed', (data) => {
@@ -51,7 +51,7 @@ export class GroupTreeComponent implements OnInit {
     });
 
     this.subjectService.subscribe('group-tree:activate', (data) => {
-      this.activateNode(data['images'][0]['code']);
+      this.activateNode(data['images'][0]['code'], false);
     });
   }
 
@@ -61,16 +61,16 @@ export class GroupTreeComponent implements OnInit {
     this.groupList = data;
   }
 
-  activateNode(nodeCode: string): void {
+  activateNode(nodeCode: string, isPageInitLoad: boolean): void {
 
     if (this.isGroupListLoaded) {
 
       this.checkedNodeCode = nodeCode;
-      this.setExpandNodeList(nodeCode);
+      this.setExpandNodeList(nodeCode, isPageInitLoad);
     }
   }
 
-  setExpandNodeList(nodeCode: string) {
+  setExpandNodeList(nodeCode: string, isPageInitLoad: boolean) {
 
     let temp = [];
 
@@ -114,28 +114,28 @@ export class GroupTreeComponent implements OnInit {
     }
 
     this.expandNodeList = temp;
-    this.loadLegend();
+    this.loadLegend(isPageInitLoad);
   }
 
-  loadLegend() {
+  loadLegend(isPageInitLoad: boolean) {
 
     if (this.checkedNodeData) {
 
       if (this.expandNodeList.length === 0) {
-        this.onClickNode('group', this.checkedNodeData);
+        this.onClickNode('group', this.checkedNodeData, isPageInitLoad);
       }
 
       if (this.expandNodeList.length === 1) {
-        this.onClickNode('sub-group', this.checkedNodeData);
+        this.onClickNode('sub-group', this.checkedNodeData, isPageInitLoad);
       }
 
       if (this.expandNodeList.length === 2) {
-        this.onClickNode('image', this.checkedNodeData);
+        this.onClickNode('image', this.checkedNodeData, isPageInitLoad);
       }
     }
   }
 
-  onClickNode(type: string, data: Object) {
+  onClickNode(type: string, data: Object, isPageInitLoad: boolean) {
 
     let nodeCode;
 
@@ -164,10 +164,10 @@ export class GroupTreeComponent implements OnInit {
       this.subjectService.trigger('legend:show', data);
     }
 
-    this.setUrl(type, nodeCode);
+    this.setUrl(isPageInitLoad, nodeCode);
   }
 
-  setUrl(type: string, nodeCode: String): void {
+  setUrl(isPageInitLoad: boolean, nodeCode: String): void {
 
     let routeSnapshot: ActivatedRouteSnapshot = this.activatedRoute.snapshot;
     let queryParams = {};
@@ -176,7 +176,7 @@ export class GroupTreeComponent implements OnInit {
 
     queryParams['nodeCode'] = nodeCode;
 
-    if (queryParams['callout']) {
+    if (!isPageInitLoad && queryParams['callout']) {
       delete queryParams['callout'];
     }
 

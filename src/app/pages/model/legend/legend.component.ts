@@ -16,9 +16,8 @@ export class LegendComponent implements OnInit, AfterViewInit{
   private isRightCollapsed: boolean = false;
   private legendTitle: string = '';
   private $legendBody;
-  private legendLoaded: boolean = false;
-  private legendTaskList: Array<any> = [];
-  private calloutTaskList: Array<any> = [];
+  private legendTask: any = null;
+  private calloutTask: any = null;
   private isSvgHotpointInited: boolean = false;
 
   constructor(
@@ -36,10 +35,10 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
         if (!this.isSvgHotpointInited) {
 
-          this.calloutTaskList.push({
+          this.calloutTask = {
             name: 'select-callout',
             data: [params['callout']]
-          });
+          };
         } else {
 
           this.$legendBody.svgHotpoint('highlightCallout', [params['callout']]);
@@ -51,19 +50,14 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
       if (!this.isSvgHotpointInited) {
 
-        this.legendTaskList.push({
+        this.legendTask = {
           name: 'show-legend',
           data
-        });
+        };
       } else {
 
         this.setLegend(data);
       }
-    });
-
-    this.subjectService.subscribe('legend:select', (callout) => {
-
-      this.$legendBody.svgHotpoint('highlightCallout', [callout]);
     });
   }
 
@@ -96,7 +90,6 @@ export class LegendComponent implements OnInit, AfterViewInit{
       callbacks: {
         onSelectionCallout: function(callout) {
 
-          self.subjectService.trigger('usage-list:select', callout);
           self.setUrl(callout);
         }
       }
@@ -105,26 +98,27 @@ export class LegendComponent implements OnInit, AfterViewInit{
     this.isSvgHotpointInited = true;
 
     this.runLegendTasks();
-
   }
 
   runLegendTasks() {
 
-    while (this.legendTaskList.length > 0) {
+    if (this.legendTask) {
 
-      let task = this.legendTaskList.shift();
+      if (this.legendTask.name === 'show-legend') this.setLegend(this.legendTask.data);
 
-      if (task.name === 'show-legend') this.setLegend(task.data);
+      this.legendTask = null;
     }
+
+    // this.runCalloutTasks();
   }
 
   runCalloutTasks() {
 
-    while (this.calloutTaskList.length > 0) {
+    if (this.calloutTask) {
 
-      let task = this.calloutTaskList.shift();
+      if (this.calloutTask.name === 'select-callout') this.$legendBody.svgHotpoint('highlightCallout', this.calloutTask.data);
 
-      if (task.name === 'select-callout') this.$legendBody.svgHotpoint('highlightCallout', task.data);
+      this.calloutTask = null;
     }
   }
 
@@ -132,14 +126,14 @@ export class LegendComponent implements OnInit, AfterViewInit{
 
     let self = this;
 
-    self.legendLoaded = false;
-
     this.$legendBody.svgHotpoint('loadSVG', {
       url: svgUrl,
       loaded: function() {
 
-        self.legendLoaded = true;
-        // self.runCalloutTasks();
+        setTimeout(() => {
+
+          self.runCalloutTasks();
+        }, 0);
       }
     });
   }

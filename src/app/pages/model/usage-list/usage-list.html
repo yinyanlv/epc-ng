@@ -10,7 +10,7 @@
   </div>
   <div class="parts-body" id="parts-body">
 
-    <div *ngFor="let item of usageList; let i = index;" class="list-item" [class.checked]="checkedCallout === item.callout ? true : false" (click)="onClickItem(item.callout)">
+    <div *ngFor="let item of usageList; let i = index;" class="list-item" [attr.data-id]="item.callout" [class.checked]="checkedCallout === item.callout ? true : false" (click)="onClickItem(item.callout)">
       <div class="item row-number">
         <div class="item-cont-wrap text-center"><span>{{item.callout}}</span><br></div>
       </div>
