@@ -22,7 +22,7 @@ const routes: Routes = [{
 }, {
   path: 'model',
   component: ModelComponent,
-  // canActivate: [CanActivateGuardService]
+  canActivate: [CanActivateGuardService]
 }, {
   path: '**',
   component: NotFoundComponent
