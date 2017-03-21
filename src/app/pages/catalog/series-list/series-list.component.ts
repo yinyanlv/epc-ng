@@ -16,6 +16,7 @@ export class SeriesListComponent implements OnInit {
   private seriesList: Array<Object> = null;
   private activeBrandCode: string;
   private activeSeriesCode: string;
+  private setBrandDefaultSeriesTask: any;
 
   constructor(
     private router: Router,
@@ -42,15 +43,15 @@ export class SeriesListComponent implements OnInit {
         return;
       } else if (!params['seriesCode']) {  // 只有brandCode参数时，默认显示该品牌的第一个车系
 
-        let matchedItem;
+        if (this.seriesList) {
 
-        this.seriesList.forEach((item, index) => {
-          if (item['brandCode'] === params['brandCode']) {
-            matchedItem = this.seriesList[index];
-          }
-        });
+          this.setBrandDefaultSeries(params['brandCode']);
+        } else {
 
-        this.setUrl(params['brandCode'], matchedItem['series'][0]['seriesCode']);
+          this.setBrandDefaultSeriesTask = {
+            brandCode: params['brandCode']
+          };
+        }
 
         return;
       }
@@ -64,7 +65,28 @@ export class SeriesListComponent implements OnInit {
 
     this.seriesList = data;
 
+    if (this.setBrandDefaultSeriesTask) {
+
+      this.setBrandDefaultSeries(this.setBrandDefaultSeriesTask.brandCode);
+
+      this.setBrandDefaultSeriesTask = null;
+      return;
+    }
+
     this.setUrl(this.activeBrandCode || this.seriesList[0]['brandCode'], this.activeSeriesCode || this.seriesList[0]['series'][0]['seriesCode']);
+  }
+
+  setBrandDefaultSeries(brandCode: string): void {
+
+    let matchedItem;
+
+    this.seriesList.forEach((item, index) => {
+      if (item['brandCode'] === brandCode) {
+        matchedItem = this.seriesList[index];
+      }
+    });
+
+    this.setUrl(brandCode, matchedItem['series'][0]['seriesCode']);
   }
 
   onCLickBrand(data): void {
