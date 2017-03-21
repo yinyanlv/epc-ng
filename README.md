@@ -5,6 +5,7 @@
 - epc-ng-server  （后台数据服务）  
 #### 启动
 ```
+  npm install
   npm start  // 项目根目录下（开发模式）
 ```
 #### 访问
