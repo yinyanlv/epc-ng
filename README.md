@@ -13,5 +13,5 @@
 ```
 #### 关于
 - 集成requirejs，jquery，svgHotPoint
-- 使用第三方UI库，primeng
+- 组件库，primeng
 - 图标库，font-awesome
