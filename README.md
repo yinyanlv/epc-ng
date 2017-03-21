@@ -5,14 +5,14 @@
 - epc-ng-server  // 后台数据服务
 #### 启动
 ```
-  // 项目根目录下（开发模式）
-  npm start
+  npm start  // 项目根目录下（开发模式）
 ```
 #### 访问
 ```
   http://localhost:4200
 ```
-#### 关于
-- 引用requirejs，jquery，svgHotPoint
-- 组件库，primeng
-- 图标库，font-awesome
+#### 相关
+- 图标库：font-awesome
+- angular2组件库：primeng
+- 集成：requirejs，jquery，svgHotPoint
+
