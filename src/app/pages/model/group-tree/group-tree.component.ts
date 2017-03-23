@@ -85,6 +85,7 @@ export class GroupTreeComponent implements OnInit {
       }
 
       for (let j = 0; j < group['subGroup'].length; j++) {
+
         let subGroup = group['subGroup'][j];
 
         if (subGroup['code'] === nodeCode) {
