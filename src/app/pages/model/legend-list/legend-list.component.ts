@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 import {SubjectService} from '../../../common/services/subject.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'legend-list',
   templateUrl: './legend-list.html',
   encapsulation: ViewEncapsulation.None

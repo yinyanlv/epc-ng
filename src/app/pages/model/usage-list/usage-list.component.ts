@@ -8,6 +8,7 @@ let globalRequire = window['require'];
 let $;
 
 @Component({
+  moduleId: module.id,
   selector: 'usage-list',
   templateUrl: './usage-list.html',
   styleUrls: ['./usage-list.scss'],

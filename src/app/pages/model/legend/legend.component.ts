@@ -7,6 +7,7 @@ let globalRequire = window['require'];
 let $;
 
 @Component({
+  moduleId: module.id,
   selector: 'app-legend',
   templateUrl: './legend.html'
 })

@@ -3,6 +3,7 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {SubjectService} from '../../common/services/subject.service';
 
 @Component({
+  moduleId: module.id,
   templateUrl: './model.html',
   styleUrls: ['./model.scss'],
   encapsulation: ViewEncapsulation.None

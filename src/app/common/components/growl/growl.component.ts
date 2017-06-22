@@ -3,6 +3,7 @@ import {Message} from 'primeng/primeng';
 import {SubjectService} from '../../services/subject.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'growl',
   templateUrl: './growl.html'
 })
