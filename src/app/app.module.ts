@@ -1,6 +1,7 @@
 import './config/rxjs-config';
 
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, Http} from '@angular/http';
@@ -28,6 +29,7 @@ import {createTranslateLoader} from './common/utils/translate';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     DropdownModule,

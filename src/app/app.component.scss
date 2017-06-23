@@ -58,7 +58,7 @@ input::-ms-clear, input::-ms-reveal {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background: url('./assets/images/search.png') no-repeat;
+  background: url('../assets/images/search.png') no-repeat;
   margin-left: -16px;
 }
 .a-link span {
@@ -74,7 +74,7 @@ input::-ms-clear, input::-ms-reveal {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background-image: url(assets/images/icon_btn.png);
+  background-image: url(../assets/images/icon_btn.png);
   background-repeat: no-repeat;
   vertical-align: top;
 }
@@ -197,13 +197,13 @@ input::-ms-clear, input::-ms-reveal {
   display: block;
   height: 100%;
   padding: 0px 34px 0px 5px;
-  background: url(assets/images/form_select_btn_icon.png) no-repeat center right;
+  background: url(../assets/images/form_select_btn_icon.png) no-repeat center right;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .disabled .form-select-text {
-  background-image: url(assets/images/form_select_btn_icon.png);
+  background-image: url(../assets/images/form_select_btn_icon.png);
 }
 .form-select-option-list {
   display: none;
@@ -278,7 +278,7 @@ input::-ms-clear, input::-ms-reveal {
   right: 3px;
   width: 24px;
   height: 24px;
-  background: url(assets/images/layer_close_btn.png) no-repeat 0 0;
+  background: url(../assets/images/layer_close_btn.png) no-repeat 0 0;
   transition: transform 0.2s ease 0s;
   text-decoration: none;
   text-indent: -9999em;
@@ -418,7 +418,7 @@ input::-ms-clear, input::-ms-reveal {
   *top: 24px;
   width: 42px;
   height: 42px;
-  background: url(assets/images/dialog_icon.png) no-repeat;
+  background: url(../assets/images/dialog_icon.png) no-repeat;
 }
 .page-dialog .detail .text {
   word-break: break-all;
@@ -572,7 +572,7 @@ input::-ms-clear, input::-ms-reveal {
   vertical-align: top;
   margin: 0 5px;
   background-color: #ffffff;
-  background-image: url(assets/images/paginition_icon.png);
+  background-image: url(../assets/images/paginition_icon.png);
   background-repeat: no-repeat;
 }
 .pagination .top:hover, .pagination .prev:hover, .pagination .next:hover, .pagination .bottom:hover {
@@ -614,7 +614,7 @@ input::-ms-clear, input::-ms-reveal {
   width: 26px;
   letter-spacing: normal;
   word-spacing: normal;
-  background: url(assets/images/ellipsis.png) no-repeat center 70%;
+  background: url(../assets/images/ellipsis.png) no-repeat center 70%;
   margin: 0 3px;
 }
 .pagination .page-btns {
@@ -698,10 +698,10 @@ input::-ms-clear, input::-ms-reveal {
   box-shadow: none;
 }
 .data-item.required .label .text {
-  background: url(assets/images/data_required_sign.png) no-repeat left center;
+  background: url(../assets/images/data_required_sign.png) no-repeat left center;
 }
 .data-item .label.required .text {
-  background: url(assets/images/data_required_sign.png) no-repeat left center;
+  background: url(../assets/images/data_required_sign.png) no-repeat left center;
 }
 .textarea-box:focus, .input-box:focus {
   border-color: #d1251a;
@@ -841,7 +841,7 @@ input::-ms-clear, input::-ms-reveal {
   width: 18px;
   height: 18px;
   margin-right: 4px;
-  background: url(assets/images/tips_icon.png) no-repeat;
+  background: url(../assets/images/tips_icon.png) no-repeat;
   vertical-align: top;
 }
 .tips .text {
@@ -947,7 +947,7 @@ input::-ms-clear, input::-ms-reveal {
   height: 21px;
   border: 1px solid #e1e1e1;
   background-color: #fff;
-  background-image: url(assets/images/calculate_icon.png);
+  background-image: url(../assets/images/calculate_icon.png);
   background-repeat: no-repeat;
 }
 .qty-box .qty-input {
@@ -1002,7 +1002,7 @@ input::-ms-clear, input::-ms-reveal {
 //.loading-indicator {
 //  height: 80px;
 //  width: 80px;
-//  background: url('assets/images/loading.gif');
+//  background: url('../assets/images/loading.gif');
 //  background-repeat: no-repeat;
 //  background-position: center center;
 //}
@@ -1027,7 +1027,7 @@ input::-ms-clear, input::-ms-reveal {
   vertical-align: middle;
 }
 .form-checkbox.checked .icon {
-  background: url('./assets/images/checked.png') no-repeat center;
+  background: url('../assets/images/checked.png') no-repeat center;
 }
 .form-checkbox .text {
   vertical-align: middle;

@@ -31,7 +31,6 @@ const langMap = {
 };
 
 @Component({
-  moduleId: module.id,
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None

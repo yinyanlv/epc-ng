@@ -4,7 +4,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {ModelTreeService} from './model-tree.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'model-tree',
   templateUrl: './model-tree.html',
   providers: [

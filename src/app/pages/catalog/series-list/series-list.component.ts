@@ -4,7 +4,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {SeriesListService} from './series-list.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'series-list',
   templateUrl: './series-list.html',
   encapsulation: ViewEncapsulation.None,

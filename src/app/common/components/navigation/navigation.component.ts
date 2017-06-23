@@ -7,7 +7,6 @@ import {GlobalStateService} from '../../services/global-state.service';
 import {NavigationService} from './navigation.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'navigation',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './navigation.html',

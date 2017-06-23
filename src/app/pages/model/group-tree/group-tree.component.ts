@@ -5,7 +5,6 @@ import {GroupTreeService} from './group-tree.service';
 import {SubjectService} from '../../../common/services/subject.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'group-tree',
   templateUrl: './group-tree.html',
   styleUrls: ['./group-tree.scss'],

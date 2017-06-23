@@ -8,7 +8,6 @@ let globalRequire = window['require'];
 let $;
 
 @Component({
-  moduleId: module.id,
   selector: 'usage-list',
   templateUrl: './usage-list.html',
   styleUrls: ['./usage-list.scss'],
@@ -40,7 +39,6 @@ export class UsageListComponent implements OnInit, AfterViewInit {
       if (this.checkedCallout) {
 
         if ($) {
-
           setTimeout(() => {
             let $temp = $(`#parts-body [data-id=${params['callout']}]`);
 

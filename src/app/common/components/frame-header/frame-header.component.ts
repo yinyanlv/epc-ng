@@ -2,7 +2,6 @@ import {Component, ViewEncapsulation, ViewChild, OnInit} from '@angular/core';
 import {SubjectService} from '../../services/subject.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'frame-header',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './frame-header.html',

@@ -4,7 +4,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CrumbsService} from './crumbs.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'crumbs',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './crumbs.html',

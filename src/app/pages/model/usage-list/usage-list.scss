@@ -16,7 +16,7 @@ body {
   top: 0;
   bottom: 0;
   width: 20px;
-  background-image: url(assets/images/expand_collapse_arrow.png);
+  background-image: url(../../../../assets/images/expand_collapse_arrow.png);
   background-repeat: no-repeat;
   cursor: pointer;
 }
@@ -196,14 +196,14 @@ body {
   display: inline-block;
   width: 16px;
   height: 16px;
-  background: url(assets/images/check_vin.png) no-repeat center;
+  background: url(../../../../assets/images/check_vin.png) no-repeat center;
 }
 
 .parts .icon-wrap .icon {
   display: inline-block;
   width: 20px;
   height: 18px;
-  background-image: url(assets/images/parts_icon.png);
+  background-image: url(../../../../assets/images/parts_icon.png);
   background-repeat: no-repeat;
 }
 

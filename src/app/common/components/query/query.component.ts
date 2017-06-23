@@ -4,7 +4,6 @@ import {SubjectService} from '../../services/subject.service';
 import {QueryService} from './query.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'dialog-query',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './query.html',
