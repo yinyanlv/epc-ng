@@ -12,7 +12,7 @@ import {ModelTreeService} from './model-tree.service';
 })
 export class ModelTreeComponent implements OnInit {
 
-  private modelList: Array<any> = [];
+  public modelList: Array<any> = [];
 
   constructor(
     private router: Router,

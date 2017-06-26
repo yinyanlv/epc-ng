@@ -13,7 +13,7 @@ import {SeriesListService} from './series-list.service';
 })
 export class SeriesListComponent implements OnInit {
 
-  private seriesList: Array<Object> = null;
+  public seriesList: Array<Object> = null;
   private activeBrandCode: string;
   private activeSeriesCode: string;
   private setBrandDefaultSeriesTask: any;

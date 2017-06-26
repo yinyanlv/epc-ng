@@ -14,7 +14,7 @@ import {CrumbsService} from './crumbs.service';
 })
 export class CrumbsComponent implements OnInit {
 
-  private crumbsList: Array<any> = [];
+  public crumbsList: Array<any> = [];
   private originalCrumbsData: Object;
 
   constructor(

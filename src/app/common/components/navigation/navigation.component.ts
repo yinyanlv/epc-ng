@@ -14,7 +14,7 @@ import {NavigationService} from './navigation.service';
 })
 export class NavigationComponent implements OnInit {
 
-  private userInfo: Object;
+  public userInfo: any;
 
   constructor(
     private globalState: GlobalStateService,

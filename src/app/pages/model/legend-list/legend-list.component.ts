@@ -10,8 +10,8 @@ import {SubjectService} from '../../../common/services/subject.service';
 })
 export class LegendListComponent implements OnInit {
 
-  private legendList: Array<Object> = [];
-  private isShow: boolean = true;
+  public legendList: Array<Object> = [];
+  public isShow: boolean = true;
 
   constructor(
     private subjectService: SubjectService,

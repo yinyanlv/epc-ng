@@ -9,8 +9,8 @@ import {SubjectService} from '../../services/subject.service';
 })
 export class FrameHeaderComponent implements OnInit{
 
-  private searchList: Array<any>;
-  private placeholder: string;
+  public searchList: Array<any>;
+  public placeholder: string;
   @ViewChild('searchType')
   private searchType;
 

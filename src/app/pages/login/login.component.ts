@@ -37,18 +37,17 @@ const langMap = {
 })
 export class LoginComponent implements OnInit, DoCheck {
 
-  private isShowError: boolean = false;
+  public isShowError: boolean = false;
   private logining: boolean = false;
-  private errorInfo: string;
-  private loginBtnText: string;
-  private lang: string;
-  private database: string;
-  private langList;
-  private databaseList;
+  public errorInfo: string;
+  public loginBtnText: string;
+  public lang: string;
+  public database: string;
+  public langList;
+  public databaseList;
 
   @ViewChild('account') account;
   @ViewChild('password') password;
-
 
   constructor(
     private el: ElementRef,

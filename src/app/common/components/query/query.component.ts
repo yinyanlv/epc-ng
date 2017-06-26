@@ -14,18 +14,18 @@ import {QueryService} from './query.service';
 })
 export class QueryComponent implements OnInit{
 
-  private isShow: boolean = false;
-  private partNo: string;
-  private partName: any;
-  private brandList: Array<Object> = [{label: '请选择', value: ''}];
-  private seriesList: Array<Object> = [{label: '请选择', value: ''}];
-  private modelGroupList: Array<Object> = [{label: '请选择', value: ''}];
-  private modelList: Array<Object> = [{label: '请选择', value: ''}];
-  private brand: string = '';
-  private series: string = '';
-  private modelGroup: string = '';
-  private model: string = '';
-  private queryResult: any = [];
+  public isShow: boolean = false;
+  public partNo: string;
+  public partName: any;
+  public brandList: Array<Object> = [{label: '请选择', value: ''}];
+  public seriesList: Array<Object> = [{label: '请选择', value: ''}];
+  public modelGroupList: Array<Object> = [{label: '请选择', value: ''}];
+  public modelList: Array<Object> = [{label: '请选择', value: ''}];
+  public brand: string = '';
+  public series: string = '';
+  public modelGroup: string = '';
+  public model: string = '';
+  public queryResult: any = [];
 
   constructor(
     private subjectService: SubjectService,

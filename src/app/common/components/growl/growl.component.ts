@@ -8,7 +8,7 @@ import {SubjectService} from '../../services/subject.service';
 })
 export class GrowlComponent implements Component{
 
-  private messages: Array<Message> = [];
+  public messages: Array<Message> = [];
 
   constructor(
     private subjectService: SubjectService

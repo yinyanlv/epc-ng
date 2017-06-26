@@ -16,11 +16,11 @@ import {SubjectService} from '../../../common/services/subject.service';
 export class GroupTreeComponent implements OnInit {
 
   private isGroupListLoaded: boolean = false;
-  private groupList: Array<any> = [];
+  public groupList: Array<any> = [];
   private expandNodeList: Array<any> = [];
   private checkedNodeCode: string = '';
   private checkedNodeData: any;
-  private isLeftCollapsed: boolean = false;
+  public isLeftCollapsed: boolean = false;
 
   constructor(
     private groupTreeService: GroupTreeService,

@@ -12,9 +12,9 @@ let $;
 })
 export class LegendComponent implements OnInit, AfterViewInit{
 
-  private isLeftCollapsed: boolean = false;
-  private isRightCollapsed: boolean = false;
-  private legendTitle: string = '';
+  public isLeftCollapsed: boolean = false;
+  public isRightCollapsed: boolean = false;
+  public legendTitle: string = '';
   private $legendBody;
   private legendTask: any = null;
   private calloutTask: any = null;

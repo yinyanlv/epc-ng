@@ -10,8 +10,8 @@ import {SubjectService} from '../../common/services/subject.service';
 })
 export class ModelComponent implements OnInit{
 
-  private isShow: boolean = false;
-  private isLeftCollapsed: boolean = false;
+  public isShow: boolean = false;
+  public isLeftCollapsed: boolean = false;
 
   constructor(
     private subjectService: SubjectService

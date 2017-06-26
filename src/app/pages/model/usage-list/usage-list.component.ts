@@ -18,9 +18,9 @@ let $;
 })
 export class UsageListComponent implements OnInit, AfterViewInit {
 
-  private usageList: Array<any> = [];
+  public usageList: Array<any> = [];
   private checkedCallout: string = '';
-  private isRightCollapsed: boolean = false;
+  public isRightCollapsed: boolean = false;
   private calloutTaskId: string = '';
 
   constructor(
