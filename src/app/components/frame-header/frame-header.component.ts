@@ -4,8 +4,8 @@ import {SubjectService} from '../../services/subject.service';
 @Component({
   selector: 'frame-header',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './frame-header.html',
-  styleUrls: ['./frame-header.scss']
+  templateUrl: 'frame-header.html',
+  styleUrls: ['frame-header.scss']
 })
 export class FrameHeaderComponent implements OnInit{
 

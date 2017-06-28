@@ -4,8 +4,8 @@ import {Router} from '@angular/router';
 import {TranslateService} from 'ng2-translate';
 
 import {LoginService} from './login.service';
-import {SelectService} from '../../common/services/select.service';
-import {GlobalStateService} from '../../common/services/global-state.service';
+import {SelectService} from '../../services/select.service';
+import {GlobalStateService} from '../../services/global-state.service';
 
 const langMap = {
   zh: {

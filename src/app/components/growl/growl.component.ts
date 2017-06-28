@@ -4,7 +4,7 @@ import {SubjectService} from '../../services/subject.service';
 
 @Component({
   selector: 'growl',
-  templateUrl: './growl.html'
+  templateUrl: 'growl.html'
 })
 export class GrowlComponent implements Component{
 

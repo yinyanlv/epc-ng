@@ -5,13 +5,13 @@ import {RouterModule} from '@angular/router';
 
 import {TranslateModule} from 'ng2-translate';
 
-import {AppSharedModule} from '../../common/modules/app-shared.module';
+import {AppSharedModule} from '../../modules/app-shared.module';
 import {ModelComponent} from './model.component';
 import {LegendListComponent} from './legend-list/legend-list.component';
 import {GroupTreeComponent} from './group-tree/group-tree.component';
 import {UsageListComponent} from './usage-list/usage-list.component';
 import {LegendComponent} from './legend/legend.component';
-import {NavigationService} from '../../common/components/navigation/navigation.service';
+import {NavigationService} from '../../components/navigation/navigation.service';
 import {routing} from './model.routing';
 
 @NgModule({

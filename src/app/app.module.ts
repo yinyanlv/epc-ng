@@ -14,12 +14,12 @@ import {AppComponent} from './app.component';
 import {routing} from './app.routing';
 import {LoginModule} from './pages/login/login.module';
 import {NotFoundModule} from './pages/not-found/not-found.module';
-import {SubjectService} from './common/services/subject.service';
-import {GlobalStateService} from './common/services/global-state.service';
-import {CanActivateGuardService} from './common/services/can-activate-guard.service';
-import {SelectService} from './common/services/select.service';
-import {HandleErrorService} from './common/services/handle-error.service';
-import {createTranslateLoader} from './common/utils/translate';
+import {SubjectService} from './services/subject.service';
+import {GlobalStateService} from './services/global-state.service';
+import {CanActivateGuardService} from './services/can-activate-guard.service';
+import {SelectService} from './services/select.service';
+import {HandleErrorService} from './services/handle-error.service';
+import {createTranslateLoader} from './utils/translate';
 
 @NgModule({
   declarations: [

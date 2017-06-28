@@ -6,8 +6,8 @@ import {QueryService} from './query.service';
 @Component({
   selector: 'dialog-query',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './query.html',
-  styleUrls: ['./query.scss'],
+  templateUrl: 'query.html',
+  styleUrls: ['query.scss'],
   providers: [
     QueryService
   ]

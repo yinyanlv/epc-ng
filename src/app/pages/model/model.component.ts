@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 
-import {SubjectService} from '../../common/services/subject.service';
+import {SubjectService} from '../../services/subject.service';
 
 @Component({
   moduleId: module.id,

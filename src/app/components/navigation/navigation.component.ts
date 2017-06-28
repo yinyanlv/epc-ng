@@ -9,8 +9,8 @@ import {NavigationService} from './navigation.service';
 @Component({
   selector: 'navigation',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './navigation.html',
-  styleUrls: ['./navigation.scss']
+  templateUrl: 'navigation.html',
+  styleUrls: ['navigation.scss']
 })
 export class NavigationComponent implements OnInit {
 

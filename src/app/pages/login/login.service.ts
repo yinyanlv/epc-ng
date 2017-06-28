@@ -3,7 +3,7 @@ import {Http, Headers} from '@angular/http';
 import {Observable} from 'rxjs';
 
 import {serverMap} from '../../config/server-config';
-import {HandleErrorService} from '../../common/services/handle-error.service';
+import {HandleErrorService} from '../../services/handle-error.service';
 
 @Injectable()
 export class LoginService {

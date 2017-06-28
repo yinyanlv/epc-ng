@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 
-import {serverMap} from '../../../config/server-config';
+import {serverMap} from '../../config/server-config';
 import {HandleErrorService} from '../../services/handle-error.service';
 
 @Injectable()

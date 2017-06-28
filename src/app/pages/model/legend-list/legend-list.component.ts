@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
-import {SubjectService} from '../../../common/services/subject.service';
+import {SubjectService} from '../../../services/subject.service';
 
 @Component({
   selector: 'legend-list',

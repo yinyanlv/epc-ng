@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router, ActivatedRoute, ActivatedRouteSnapshot} from '@angular/router';
 
-import {SubjectService} from '../../../common/services/subject.service';
+import {SubjectService} from '../../../services/subject.service';
 
 let globalRequire = window['require'];
 let $;

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs';
 
-import {serverMap} from '../../config/server-config';
+import {serverMap} from '../config/server-config';
 import {HandleErrorService} from './handle-error.service';
 
 @Injectable()

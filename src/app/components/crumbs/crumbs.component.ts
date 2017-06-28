@@ -6,8 +6,8 @@ import {CrumbsService} from './crumbs.service';
 @Component({
   selector: 'crumbs',
   encapsulation: ViewEncapsulation.None,
-  templateUrl: './crumbs.html',
-  styleUrls: ['./crumbs.scss'],
+  templateUrl: 'crumbs.html',
+  styleUrls: ['crumbs.scss'],
   providers: [
     CrumbsService
   ]
