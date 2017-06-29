@@ -3,9 +3,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {serverMap} from '../config/server-config';
 
 @Pipe({
-  name: 'rebuildImgSrc'
+  name: 'imgSrc'
 })
-export class RebuildImgSrcPipe implements PipeTransform{
+export class ImgSrcPipe implements PipeTransform{
 
   transform(src: string) {
 

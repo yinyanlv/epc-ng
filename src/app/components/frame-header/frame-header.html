@@ -1,5 +1,5 @@
 <div class="page-header clearfix" id="page-header">
-  <a class="logo" [routerLink]="['/catalog']"><img src="{{'images/P01.png' | rebuildImgSrc}}"></a>
+  <a class="logo" [routerLink]="['/catalog']"><img src="{{'images/P01.png' | imgSrc}}"></a>
 
   <div class="search-box">
     <p-dropdown [options]="searchList" [style]="{width: '100px'}" #searchType (onChange)="selectChange($event)" ></p-dropdown>
