@@ -1,6 +1,8 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
 
+let globalConfig = window['globalConfig'];
+
 @Component({
   selector: 'app-root',
   encapsulation: ViewEncapsulation.None,
