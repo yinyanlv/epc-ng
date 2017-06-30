@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 export class EpcNgPage {
   navigateTo() {
@@ -6,6 +6,6 @@ export class EpcNgPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getWebElement();
+    return element(by.css('app-root h1')).getText();
   }
 }
