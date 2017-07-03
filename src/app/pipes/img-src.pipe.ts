@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
-import {serverMap} from '../config/server-config';
+import {serverMap} from '../../config/server.conf';
 
 @Pipe({
   name: 'imgSrc'
