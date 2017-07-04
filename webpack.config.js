@@ -13,7 +13,7 @@ module.exports = {
   entry: entryConfig,
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash:8].css',
+    filename: '[name].[hash:20].css',
     publicPath: ''
   },
   module: {
@@ -39,6 +39,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('[name].[hash:8].css')
+    new ExtractTextPlugin('[name].[hash:20].css')
   ]
 };
