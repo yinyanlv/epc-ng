@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck} from '@angular/core';
+import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {TranslateService} from 'ng2-translate';
@@ -7,28 +7,6 @@ import {LoginService} from './login.service';
 import {SelectService} from '../../services/select.service';
 import {GlobalStateService} from '../../services/global-state.service';
 
-const langMap = {
-  zh: {
-    login: '登录',
-    logining: '登录中...',
-    errorList: [
-      '未知错误',
-      '帐号为必填项',
-      '密码为必填项',
-      '用户名或密码错误'
-    ]
-  },
-  en: {
-    login: 'login',
-    logining: 'logining...',
-    errorList: [
-     'unknown error',
-     'username is required',
-     'password is required',
-     'username or password is error'
-   ]
- }
-};
 
 @Component({
   templateUrl: './login.html',
@@ -46,7 +24,8 @@ export class LoginComponent implements OnInit, DoCheck {
   public langList;
   public databaseList;
 
-  @ViewChild('account') account;
+  @ViewChild('loginForm') loginForm;
+  @ViewChild('username') username;
   @ViewChild('password') password;
 
   constructor(
@@ -63,9 +42,6 @@ export class LoginComponent implements OnInit, DoCheck {
 
     let lang = this.globalState.getLanguage();
 
-    this.errorInfo = langMap[lang].errorList[0];
-    this.loginBtnText = langMap[lang].login;
-
     this.selectService
       .load('lang')
       .subscribe((res) => {
@@ -79,6 +55,9 @@ export class LoginComponent implements OnInit, DoCheck {
         this.databaseList = res;
         this.database = this.databaseList[0].value;
       });
+
+    this.loginBtnText = 'login.validator.login';
+    this.errorInfo = 'login.validator.unknown';
   }
 
   ngDoCheck() {
@@ -86,16 +65,15 @@ export class LoginComponent implements OnInit, DoCheck {
     this.lang = this.globalState.getLanguage();
   }
 
+  @HostListener('keyup.enter')
   login(): void {
 
     if (this.logining) return;
 
-    let lang = this.globalState.getLanguage();
-
-    if (this.validate()) {
+    if (this.loginForm.form.valid) {
 
       this.logining = true;
-      this.loginBtnText = langMap[lang].logining;
+      this.loginBtnText = 'login.validator.logining';
 
       let params = this.getParams();
 
@@ -103,7 +81,7 @@ export class LoginComponent implements OnInit, DoCheck {
         .login(params)
         .subscribe((res) => {
 
-          this.loginBtnText = langMap[lang].login;
+          this.loginBtnText = 'login.validator.login';
           this.logining = false;
 
           this.globalState.setAsLogined(params.username);
@@ -114,49 +92,32 @@ export class LoginComponent implements OnInit, DoCheck {
 
           } else {
 
-            this.isShowError = true;
-            this.errorInfo = langMap[lang].errorList[3];
-            this.account.nativeElement.focus();
+            this.errorInfo = 'login.validator.invalid';
+            this.username.nativeElement.focus();
           }
         });
+    } else {
+
+      this.showError();
     }
   }
 
-  validate(): boolean {
+  showError(): void {
 
-    let lang = this.globalState.getLanguage();
-
-    this.isShowError = false;
-
-    if (this.account.nativeElement.value.trim() === '') {
-
-      this.isShowError = true;
-      this.errorInfo = langMap[lang].errorList[1];
-      this.account.nativeElement.focus();
-
-      return false;
+    if (this.username.form.invalid) {
+      this.errorInfo = 'login.validator.username';
+      this.username.nativeElement.focus();
     }
 
-    if (this.password.nativeElement.value.trim() === '') {
-
-      this.isShowError = true;
-      this.errorInfo = langMap[lang].errorList[2];
+    if (this.password.form.invalid) {
+      this.errorInfo = 'login.validator.password';
       this.password.nativeElement.focus();
-
-      return false;
     }
-
-    return true;
   }
 
   getParams() {
 
-    return {
-      username: this.account.nativeElement.value,
-      password: this.password.nativeElement.value,
-      lang: this.lang,
-      database: this.database
-    };
+    return this.loginForm.value;
   }
 
   onChangeLang() {
@@ -165,7 +126,6 @@ export class LoginComponent implements OnInit, DoCheck {
 
     this.translateService.use(lang);
     this.globalState.setLanguage(lang);
-    this.loginBtnText = langMap[lang].login;
   }
 }
 

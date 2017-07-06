@@ -1,54 +1,54 @@
-<div class="box-login zh">
-  <div class="wrap">
-    <div class="wrap-row">
-      <div id="container" class="container">
-        <div class="header">{{'login.title' | translate}}</div>
-        <div class="msg-box">
-          <div id="msg" class="msg" [style.display]="isShowError ? 'block' : 'none'">
-            <div class="tips error">
-              <span class="icon"></span>
-              <span data-msg="msg" class="text">{{errorInfo}}</span>
+<form #loginForm="ngForm" (ngSubmit)="login()" novalidate>
+  <div class="box-login zh">
+    <div class="wrap">
+      <div class="wrap-row">
+        <div id="container" class="container">
+          <div class="header">{{'login.title' | translate}}</div>
+          <div class="msg-box">
+            <div id="msg" class="msg" [style.display]="loginForm.invalid ? 'block' : 'none'">
+              <div class="tips error">
+                <span class="icon"></span>
+                <span class="text">{{errorInfo | translate}}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="body clearfix">
-          <div class="row row-login">
-            <div class="cell label">{{'login.username' | translate}}:</div>
-            <div class="cell textbox">
-              <input type="text" id="account" class="input-box" data-field="usr" #account (keyup.enter)="login()"
-                     [style.focus]="true">
+          <div class="body clearfix">
+            <div class="row row-login">
+              <div class="cell label">{{'login.username' | translate}}:</div>
+              <div class="cell textbox">
+                <input type="text" class="input-box" name="username" ngModel required #username />
+              </div>
+              <div class="cell textbox">
+                <span class="star-symbol">*</span>
+              </div>
             </div>
-            <div class="cell textbox">
-              <span class="star-symbol">*</span>
+            <div class="row row-login">
+              <div class="cell label">{{'login.password' | translate}}:</div>
+              <div class="cell textbox">
+                <input type="password" class="input-box" name="password" ngModel required autocomplete="off" #password />
+              </div>
+              <div class="cell textbox">
+                <span class="star-symbol">*</span>
+              </div>
             </div>
-          </div>
-          <div class="row row-login">
-            <div class="cell label">{{'login.password' | translate}}:</div>
-            <div class="cell textbox">
-              <input type="password" class="input-box" id="password" data-field="pwd" autocomplete="off" #password
-                     (keyup.enter)="login()">
+            <div class="row row-login">
+              <div class="cell label">{{'login.language' | translate}}:</div>
+              <div class="cell textbox">
+                <p-dropdown [options]="langList" [style]="{width: '182px'}" name="lang" [(ngModel)]="lang" (onChange)="onChangeLang()"></p-dropdown>
+              </div>
             </div>
-            <div class="cell textbox">
-              <span class="star-symbol">*</span>
+            <div class="row row-login">
+              <div class="cell label">{{'login.database' | translate}}:</div>
+              <div class="cell textbox">
+                <p-dropdown [options]="databaseList" [style]="{width: '182px'}" [(ngModel)]="database" name="database"></p-dropdown>
+              </div>
             </div>
-          </div>
-          <div class="row row-login">
-            <div class="cell label">{{'login.language' | translate}}:</div>
-            <div class="cell textbox">
-              <p-dropdown [options]="langList" [style]="{width: '182px'}" [(ngModel)]="lang" (onChange)="onChangeLang()"></p-dropdown>
+            <div class="row row-login" style="padding: 10px 0 5px;">
+              <input type="submit" id="btn-login" class="btn-login" value="{{loginBtnText | translate}}">
             </div>
-          </div>
-          <div class="row row-login">
-            <div class="cell label">{{'login.database' | translate}}:</div>
-            <div class="cell textbox">
-              <p-dropdown [options]="databaseList" [style]="{width: '182px'}" [(ngModel)]="database"></p-dropdown>
-            </div>
-          </div>
-          <div class="row row-login" style="padding: 10px 0 5px;">
-            <input type="button" id="btn-login" class="btn-login" value="{{loginBtnText}}" (click)="login()">
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</form>

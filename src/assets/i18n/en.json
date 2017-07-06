@@ -10,7 +10,15 @@
     "username": "username",
     "password": "password",
     "language": "language",
-    "database": "database"
+    "database": "database",
+    "validator": {
+      "login": "login",
+      "logining": "logining...",
+      "unknown": "unknown error",
+      "username": "username is required",
+      "password": "password is required",
+      "invalid": "username or password is error"
+    }
   },
   "catalog": {
     "treeTitle": "Model"
