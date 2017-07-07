@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, HostListener, Renderer, AfterViewChecked } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnInit, HostListener, AfterViewChecked } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
   constructor(
     private router: Router,
-    private renderer: Renderer,
     private loginService: LoginService,
     private selectService: SelectService,
     private globalState: GlobalStateService,
@@ -77,7 +76,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
     if (this.usernameControl.invalid) {
       this.isShowError = true;
-      this.focus(this.username.nativeElement);
+      this.username.nativeElement.focus();
       this.errorInfo = 'login.validator.username';
 
       return;
@@ -86,7 +85,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     if (this.passwordControl.invalid) {
       this.isShowError = true;
 
-      this.focus(this.password.nativeElement);
+      this.password.nativeElement.focus();
       this.errorInfo = 'login.validator.password';
 
       return;
@@ -124,17 +123,12 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
             this.isShowError = true;
             this.errorInfo = 'login.validator.invalid';
-            this.focus(this.username.nativeElement);
+            this.username.nativeElement.focus();
           }
         });
     } else {
       this.doValidate();
     }
-  }
-
-  focus(el: ElementRef): void {
-
-    this.renderer.invokeElementMethod(el, 'focus');
   }
 
   onChangeLang() {
