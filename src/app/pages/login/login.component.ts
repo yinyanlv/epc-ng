@@ -1,5 +1,10 @@
-import {Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck, HostListener} from '@angular/core';
+import {
+  Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck, HostListener, Renderer,
+  AfterViewInit
+} from '@angular/core';
 import {Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
+
 
 import {TranslateService} from 'ng2-translate';
 
@@ -13,24 +18,25 @@ import {GlobalStateService} from '../../services/global-state.service';
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit, DoCheck {
+export class LoginComponent implements OnInit, AfterViewInit {
 
-  public isShowError: boolean = false;
   private logining: boolean = false;
-  public errorInfo: string;
-  public loginBtnText: string;
-  public lang: string;
-  public database: string;
-  public langList;
-  public databaseList;
+  errorInfo: string;
+  loginBtnText: string;
+  lang: string;
+  database: string;
+  langList: Array<any>;
+  databaseList: Array<any>;
+  usernameControl: FormControl;
+  passwordControl: FormControl;
 
   @ViewChild('loginForm') loginForm;
   @ViewChild('username') username;
   @ViewChild('password') password;
 
   constructor(
-    private el: ElementRef,
     private router: Router,
+    private renderer: Renderer,
     private loginService: LoginService,
     private selectService: SelectService,
     private globalState: GlobalStateService,
@@ -39,8 +45,6 @@ export class LoginComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-
-    let lang = this.globalState.getLanguage();
 
     this.selectService
       .load('lang')
@@ -60,9 +64,30 @@ export class LoginComponent implements OnInit, DoCheck {
     this.errorInfo = 'login.validator.unknown';
   }
 
-  ngDoCheck() {
+  ngAfterViewInit() {
 
-    this.lang = this.globalState.getLanguage();
+    this.usernameControl = this.loginForm.form.get('username');
+    this.passwordControl = this.loginForm.form.get('password');
+  }
+
+  doValidate() {
+
+    if (this.usernameControl.invalid) {
+      this.errorInfo = 'login.validator.username';
+      this.focus(this.username.nativeElement);
+
+      return;
+    }
+
+    if (this.passwordControl.invalid) {
+      this.errorInfo = 'login.validator.password';
+      this.focus(this.password.nativeElement);
+
+      return;
+    }
+
+    this.errorInfo = 'login.validator.invalid';
+    this.focus(this.username.nativeElement);
   }
 
   @HostListener('keyup.enter')
@@ -75,7 +100,7 @@ export class LoginComponent implements OnInit, DoCheck {
       this.logining = true;
       this.loginBtnText = 'login.validator.logining';
 
-      let params = this.getParams();
+      let params = this.loginForm.value;
 
       this.loginService
         .login(params)
@@ -90,34 +115,14 @@ export class LoginComponent implements OnInit, DoCheck {
 
             this.router.navigate(['/catalog']);
 
-          } else {
-
-            this.errorInfo = 'login.validator.invalid';
-            this.username.nativeElement.focus();
           }
         });
-    } else {
-
-      this.showError();
     }
   }
 
-  showError(): void {
+  focus(el: ElementRef): void {
 
-    if (this.username.form.invalid) {
-      this.errorInfo = 'login.validator.username';
-      this.username.nativeElement.focus();
-    }
-
-    if (this.password.form.invalid) {
-      this.errorInfo = 'login.validator.password';
-      this.password.nativeElement.focus();
-    }
-  }
-
-  getParams() {
-
-    return this.loginForm.value;
+    this.renderer.invokeElementMethod(el, 'focus');
   }
 
   onChangeLang() {

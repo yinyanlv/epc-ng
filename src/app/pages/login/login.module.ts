@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {DropdownModule} from 'primeng/primeng';
@@ -10,6 +11,7 @@ import {LoginService} from './login.service';
 @NgModule({
   declarations: [LoginComponent],
   imports: [
+    CommonModule,
     FormsModule,
     DropdownModule,
     TranslateModule
