@@ -1,10 +1,6 @@
-import {
-  Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, DoCheck, HostListener, Renderer,
-  AfterViewInit
-} from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef, OnInit, HostListener, Renderer, AfterViewChecked } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-
 
 import {TranslateService} from 'ng2-translate';
 
@@ -18,9 +14,10 @@ import {GlobalStateService} from '../../services/global-state.service';
   styleUrls: ['./login.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewChecked {
 
   private logining: boolean = false;
+  isShowError: boolean;
   errorInfo: string;
   loginBtnText: string;
   lang: string;
@@ -50,7 +47,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       .load('lang')
       .subscribe((res) => {
         this.langList = res;
-        this.lang = this.langList[0].value;
+        this.lang = this.langList[1].value;
       });
 
     this.selectService
@@ -64,30 +61,38 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.errorInfo = 'login.validator.unknown';
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
 
-    this.usernameControl = this.loginForm.form.get('username');
-    this.passwordControl = this.loginForm.form.get('password');
+    if (!this.usernameControl) {
+      this.usernameControl = this.loginForm.form.get('username');
+    }
+
+    if (!this.passwordControl) {
+      this.passwordControl = this.loginForm.form.get('password');
+    }
   }
 
+  @HostListener('keyup')
   doValidate() {
 
     if (this.usernameControl.invalid) {
-      this.errorInfo = 'login.validator.username';
+      this.isShowError = true;
       this.focus(this.username.nativeElement);
+      this.errorInfo = 'login.validator.username';
 
       return;
     }
 
     if (this.passwordControl.invalid) {
-      this.errorInfo = 'login.validator.password';
+      this.isShowError = true;
+
       this.focus(this.password.nativeElement);
+      this.errorInfo = 'login.validator.password';
 
       return;
     }
 
-    this.errorInfo = 'login.validator.invalid';
-    this.focus(this.username.nativeElement);
+    this.isShowError = false;
   }
 
   @HostListener('keyup.enter')
@@ -115,8 +120,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
             this.router.navigate(['/catalog']);
 
+          } else {
+
+            this.isShowError = true;
+            this.errorInfo = 'login.validator.invalid';
+            this.focus(this.username.nativeElement);
           }
         });
+    } else {
+      this.doValidate();
     }
   }
 
