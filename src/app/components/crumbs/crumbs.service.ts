@@ -1,18 +1,20 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 
-import {serverMap} from '../../../config/server.conf';
 import {HandleErrorService} from '../../services/handle-error.service';
+import {GlobalConfigService} from '../../services/global-config.service';
 
 @Injectable()
 export class CrumbsService {
 
-  private crumbsUrl = serverMap.basePath + '/crumbs/load';
+  private crumbsUrl: string;
 
   constructor(
     private http: Http,
-    private handleError: HandleErrorService
+    private handleError: HandleErrorService,
+    private globalConfig: GlobalConfigService
   ) {
+    this.crumbsUrl = globalConfig.get('path') + '/crumbs/load'
   }
 
   load(params: Object) {

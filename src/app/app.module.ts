@@ -17,6 +17,7 @@ import {GlobalStateService} from './services/global-state.service';
 import {CanActivateGuardService} from './services/can-activate-guard.service';
 import {SelectService} from './services/select.service';
 import {HandleErrorService} from './services/handle-error.service';
+import {GlobalConfigService} from './services/global-config.service';
 import {createTranslateLoader} from './utils/translate';
 
 @NgModule({
@@ -44,7 +45,8 @@ import {createTranslateLoader} from './utils/translate';
     GlobalStateService,
     CanActivateGuardService,
     SelectService,
-    HandleErrorService
+    HandleErrorService,
+    GlobalConfigService
   ],
   bootstrap: [AppComponent]
 })

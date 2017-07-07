@@ -1,18 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs';
-import {serverMap} from '../../../../config/server.conf';
 import {HandleErrorService} from '../../../services/handle-error.service';
+import {GlobalConfigService} from '../../../services/global-config.service';
 
 @Injectable()
 export class UsageListService {
 
-  private usageListUrl = serverMap.basePath + '/model/usage/getList';
+  private usageListUrl: string;
 
   constructor(
     private http: Http,
-    private handleError: HandleErrorService
+    private handleError: HandleErrorService,
+    private globalConfig: GlobalConfigService
   ) {
+
+    this.usageListUrl = globalConfig.get('path') + '/model/usage/getList';
   }
 
   loadList(params: Object): Observable<any> {

@@ -1,18 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs';
-import {serverMap} from '../../../../config/server.conf';
 import {HandleErrorService} from '../../../services/handle-error.service';
+import {GlobalConfigService} from '../../../services/global-config.service';
 
 @Injectable()
 export class ModelTreeService {
 
-  private modelListUrl = serverMap.basePath + '/catalog/model/getList';
+  private modelListUrl: string;
 
   constructor(
     private http: Http,
-    private handleError: HandleErrorService
+    private handleError: HandleErrorService,
+    private globalConfig: GlobalConfigService
   ) {
+
+    this.modelListUrl = globalConfig.get('path') + '/catalog/model/getList';
   }
 
   loadList(params: Object): Observable<any> {

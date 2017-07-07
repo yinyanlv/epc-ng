@@ -1,23 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams} from '@angular/http';
 
-import {serverMap} from '../../../config/server.conf';
 import {HandleErrorService} from '../../services/handle-error.service';
+import {GlobalConfigService} from '../../services/global-config.service';
 
 @Injectable()
 export class QueryService {
 
-  private queryUrl = serverMap.basePath + '/query/load';
+  private queryUrl: string;
 
   constructor(
     private http: Http,
-    private handleError: HandleErrorService
+    private handleError: HandleErrorService,
+    private globalConfig: GlobalConfigService
   ) {
+
+    this.queryUrl = globalConfig.get('path') + '/query/load';
   }
 
   load(type: string, params: Object) {
 
-    let selectorUrl = serverMap.basePath + '/select/loadWithQuery/' + type;
+    let selectorUrl = this.globalConfig.get('path') + '/select/loadWithQuery/' + type;
     let temp = new URLSearchParams();
 
     Object.keys(params).forEach((key) => {

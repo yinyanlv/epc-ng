@@ -2,20 +2,23 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-import {serverMap} from '../../../config/server.conf';
 import {GlobalStateService} from '../../services/global-state.service';
+import {GlobalConfigService} from '../../services/global-config.service';
 import {HandleErrorService} from '../../services/handle-error.service';
 
 @Injectable()
 export class NavigationService {
 
-  private userInfoUrl = serverMap.basePath + '/userInfo';
+  private userInfoUrl: string;
 
   constructor(
     private http: Http,
     private globalState: GlobalStateService,
-    private handleError: HandleErrorService
+    private handleError: HandleErrorService,
+    private globalConfig: GlobalConfigService
   ){
+
+    this.userInfoUrl = globalConfig.get('path') + '/userInfo';
   }
 
   loadUserInfo(username: string): Observable<any>{
