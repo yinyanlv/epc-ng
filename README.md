@@ -2,7 +2,7 @@
 #### 依赖
 - node >= 6.9.*
 - angular-cli  （构建工具，全局模式安装）
-- epc-ng-server  （后台数据服务）  
+- epc-ng-backend  （后台数据服务）  
 #### 启动
 ```
   npm install
